@@ -25,17 +25,17 @@ This problem decomposes into several areas of activity:
    - [ ] Modify model to produce untrained clusters
 
 ## Technologies & Technical Challenges
-  ##### Backend: Python/Django
-  ##### Frontend: React/JavaScript
+  ###### Backend: Python/Django
+  ###### Frontend: React/JavaScript
 
 #### Composing a dataset
   + ##### Accessing song data
-    + 'Million Song Dataset' has produced a publicly available dataset from Last.fm, which contains songs and genre tags. We may be able to extract the meta-data we need for building out a list of training songs directly from this dataset
-    + Regardless, we can use the Last.fm API to determine 20-30 top tags that we feel adequately covers a wide range of genres. We will use SQL queries on the MSD, or API calls by tag-name to Last.fm to get a robust list of tracks with which to train our model
+   - 'Million Song Dataset' has produced a publicly available dataset from Last.fm, which contains songs and genre tags. We may be able to extract the meta-data we need for building out a list of training songs directly from this dataset
+   - Regardless, we can use the Last.fm API to determine 20-30 top tags that we feel adequately covers a wide range of genres. We will use SQL queries on the MSD, or API calls by tag-name to Last.fm to get a robust list of tracks with which to train our model
 
   + ##### Feature Extraction
-    + Using this list of song titles and tags, we will stream 30-second clips of songs from the Spotify API into our Feature Extraction module
-    + Our Feature Extraction module will implement the pyAudioAnalysis Library to extract a variety of features of the audio into a multi dimensional vector which, along with the corresponding genre tag, will constitute an entry into our training dataset
+   - Using this list of song titles and tags, we will stream 30-second clips of songs from the Spotify API into our Feature Extraction module
+   - Our Feature Extraction module will implement the pyAudioAnalysis Library to extract a variety of features of the audio into a multi dimensional vector which, along with the corresponding genre tag, will constitute an entry into our training dataset
 
 #### Constructing the neural network
   + ##### Building the network
@@ -47,16 +47,23 @@ This problem decomposes into several areas of activity:
     - Once the network is constructed and dataset established, it is somewhat trivial to train the model
     - Validation will be done with a subset of our dataset, and by subjective judgement
 
-#### Backend
-
-#### Frontend Interface
-  + ##### Searching and Streaming
+#### UX
+  + ##### Frontend Interface
     - We will implement calls to Spotify search to populate an autosuggest field to allow users to select a song to evaluate
-    - We will make send the id to the backend and receive a result for user evaluation
+    - We will send the songId to the backend and then receive genre results for user evaluation
+    - There will be some sort of animation or information pop-up to occupy the user while waiting for results.
+
+  + #### Backend
+    + Our backend will be a standard Django build that will be able to receive urls from the frontend when the user selects a song
+    + The backend will make a request for the 30-preview of the song from Spotify and load it into a buffer
+    + The audio features will be extracted from the buffer, and a test object created and fed into the NN
+    + The results of the NN will be sent back to the frontend
 
 ## Project Flowchart
 
-![project-diagram](./images/project-diagram.png)
+![build-phase](./images/build-phase.png)
+
+![ux-phase](./images/ux-phase.png)
 
 
 ## Group Members & Work Breakdown
@@ -76,14 +83,13 @@ This problem decomposes into several areas of activity:
 
 ### Day 2
   - scripting the population process (one at a time) **ADOM**
-    * get song name and tag from MSD (D1)
-    * make API call to Spotify with song name (D1) **ALEC**
-    * buffer object written **ANDREW**
-    * receive audio into buffer and output files (D1)
-    * convert and analyze with full suite of features **ADOM**
-    * parse and join back with tag
-    * enter into master database
-
+    - get song name and tag from MSD (D1)
+    - make API call to Spotify with song name (D1) **ALEC**
+    - buffer object written **ANDREW**
+    - receive audio into buffer and output files (D1)
+    - convert and analyze with full suite of features **ADOM**
+    - parse and join back with tag
+    - enter into master database
   - How the NN needs to be different for our implementation **GROUP/ANDREW**
   - Verify schedule and touch base, assess MVPs **decide Day 3/4 roles**
   - Django setup **ADOM**
