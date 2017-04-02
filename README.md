@@ -25,17 +25,17 @@ This problem decomposes into several areas of activity:
    - [ ] Modify model to produce untrained clusters
 
 ## Technologies & Technical Challenges
-  ###### Backend: Python/Django
-  ###### Frontend: React/JavaScript
+  ##### Backend: Python/Django
+  ##### Frontend: React/JavaScript
 
 #### Composing a dataset
   + ##### Accessing song data
-   - 'Million Song Dataset' has produced a publicly available dataset from Last.fm, which contains songs and genre tags. We may be able to extract the meta-data we need for building out a list of training songs directly from this dataset
-   - Regardless, we can use the Last.fm API to determine 20-30 top tags that we feel adequately covers a wide range of genres. We will use SQL queries on the MSD, or API calls by tag-name to Last.fm to get a robust list of tracks with which to train our model
+    + 'Million Song Dataset' has produced a publicly available dataset from Last.fm, which contains songs and genre tags. We may be able to extract the meta-data we need for building out a list of training songs directly from this dataset
+    + Regardless, we can use the Last.fm API to determine 20-30 top tags that we feel adequately covers a wide range of genres. We will use SQL queries on the MSD, or API calls by tag-name to Last.fm to get a robust list of tracks with which to train our model
 
   + ##### Feature Extraction
-   - Using this list of song titles and tags, we will stream 30-second clips of songs from the Spotify API into our Feature Extraction module
-   - Our Feature Extraction module will implement the pyAudioAnalysis Library to extract a variety of features of the audio into a multi dimensional vector which, along with the corresponding genre tag, will constitute an entry into our training dataset
+    + Using this list of song titles and tags, we will stream 30-second clips of songs from the Spotify API into our Feature Extraction module
+    + Our Feature Extraction module will implement the pyAudioAnalysis Library to extract a variety of features of the audio into a multi dimensional vector which, along with the corresponding genre tag, will constitute an entry into our training dataset
 
 #### Constructing the neural network
   + ##### Building the network
