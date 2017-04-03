@@ -1,0 +1,5 @@
+from pyAudioAnalysis import audioTrainTest as aT
+from pyAudioAnalysis import dirWavFeatureExtraction as ltFeatureExt
+from pyAudioAnalysis import dirWavFeatureExtractionNoAveraging as FeatureExtNoAvg
+from pyAudioAnalysis import beatExtraction as beatExtraction
+from pyAudioAnalysis import convertDirMP3ToWav as DirMp3ToWav
