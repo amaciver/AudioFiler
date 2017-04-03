@@ -8,7 +8,7 @@ from pyAudioAnalysis import audioBasicIO as audioBasicIO
 
 
 # convert every file in directory to WAV
-audioBasicIO.convertDirMP3ToWav('../test_data', 16000, 1, true)
+audioBasicIO.convertDirMP3ToWav('../test_data', 16000, 1, True)
 
 def bpm(filename):
     Fs, x = audioBasicIO.readAudioFile(filename)
@@ -19,7 +19,12 @@ def bpm(filename):
 vectors, filenames = aF.dirWavFeatureExtraction('../test_data', 60, 30, 1, 1)
 bpms = map(bpm, filenames)
 
-results = zip(filenames, [vectors], bpms)
+# print vectors
+# print filenames
+
+
+# oh I'll have to wrap filenames and vectors in an array if there is only one file
+results = zip(filenames, vectors, bpms)
 
 print results
 
