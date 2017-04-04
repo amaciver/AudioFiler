@@ -160,7 +160,7 @@ c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEX
 # iterate through the directory, check the top 3 tags, and use the first one that is in our list as the genre.
 # if it has none, skip it. Otherwise, send a query to spotify with the title and artist, and retreive the preview URL.
 # if the query to spotify comes back empty, continue to the next one.
-for root, directory, files in os.walk('./lastfm_train/A/A'):
+for root, directory, files in os.walk('./lastfm_train'):
     for file in files:
         # take care of .ds_store
         if file.startswith('.'):
@@ -204,8 +204,10 @@ for root, directory, files in os.walk('./lastfm_train/A/A'):
                     preview_url = response.json()['tracks']['items'][0]['preview_url']
                     track = (track_title, track_artist, ACCEPTED_GENRES[genre], preview_url)
                     c.execute('''INSERT INTO tracks(title, artist, genre, preview_url) VALUES(?,?,?,?)''', track)
-                except IndexError:
-                    print('deleted: ' + track_title + ' by ' + track_artist)
+                except (IndexError, KeyError) as err:
+                    print(response.status_code)
+                    print(response)
+                    print('deleted: ' + track_title + ' by ' + track_artist + file)
                     os.remove(root + '/' + file)
 conn.commit()
 conn.close()
