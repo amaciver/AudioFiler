@@ -2,6 +2,7 @@ import sqlite3
 import os
 import json
 import requests
+import pdb
 
 # map common variations of genres to our consistent version
 ACCEPTED_GENRES = {
@@ -200,6 +201,6 @@ for root, directory, files in os.walk('./subset'):
                     track = (track_title, track_artist, ACCEPTED_GENRES[genre], preview_url)
                     c.execute('''INSERT INTO tracks(title, artist, genre, preview_url) VALUES(?,?,?,?)''', track)
                 except IndexError:
-                    pass
+                    os.remove(root + '/' + file)
 conn.commit()
 conn.close()
