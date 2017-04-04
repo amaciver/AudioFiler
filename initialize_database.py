@@ -152,7 +152,7 @@ ACCEPTED_GENRES = {
     }
 
 # create new database
-conn = sqlite3.connect('subset.db')
+conn = sqlite3.connect('main.db')
 c = conn.cursor()
 
 c.execute('''DROP TABLE IF EXISTS tracks''')
@@ -160,7 +160,7 @@ c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEX
 # iterate through the directory, check the top 3 tags, and use the first one that is in our list as the genre.
 # if it has none, skip it. Otherwise, send a query to spotify with the title and artist, and retreive the preview URL.
 # if the query to spotify comes back empty, continue to the next one.
-for root, directory, files in os.walk('./subset'):
+for root, directory, files in os.walk('./lastfm_train/A/A'):
     for file in files:
         # take care of .ds_store
         if file.startswith('.'):
