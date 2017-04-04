@@ -104,7 +104,7 @@ ACCEPTED_GENRES = {
     'Punk': 'Punk',
     'Punk Rock': 'Punk',
     'Punk rock': 'Punk',
-    'punk': 'punk',
+    'punk': 'Punk',
     'punk rock': 'Punk',
     'hardcore punk': 'Punk',
     'post-punk': 'Punk',
