@@ -1,0 +1,20 @@
+{
+  "name": "AudioFiler",
+  "version": "1.0.0",
+  "description": "### AudioFiler is a project aiming to implement machine learning to classify songs into genres",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amaciver/AudioFiler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amaciver/AudioFiler/issues"
+  },
+  "homepage": "https://github.com/amaciver/AudioFiler#readme"
+}
