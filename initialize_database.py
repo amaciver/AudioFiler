@@ -194,13 +194,18 @@ for root, directory, files in os.walk('./subset'):
             if make_query:
                 base_url = "https://api.spotify.com/v1/search?q="
                 title = f"track:\"{data['title']}\""
+                if '&' in title:
+                    title = 'and'.join(title.split('&'))
                 artist = f"artist:\"{data['artist']}\""
+                if '&' in artist:
+                    artist = 'and'.join(artist.split('&'))
                 response = requests.get(base_url + title + "%20" + artist + "&type=track&limit=1")
                 try:
                     preview_url = response.json()['tracks']['items'][0]['preview_url']
                     track = (track_title, track_artist, ACCEPTED_GENRES[genre], preview_url)
                     c.execute('''INSERT INTO tracks(title, artist, genre, preview_url) VALUES(?,?,?,?)''', track)
                 except IndexError:
+                    print('deleted: ' + track_title + ' by ' + track_artist)
                     os.remove(root + '/' + file)
 conn.commit()
 conn.close()
