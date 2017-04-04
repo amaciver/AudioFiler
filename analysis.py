@@ -22,30 +22,17 @@ def bpm(filename):
 vectors, filenames = aF.dirWavFeatureExtraction('./test_data', 60, 30, 1, 1)
 bpms = map(bpm, filenames)
 
-# print vectors
-# print filenames
-
-
 # oh I'll have to wrap filenames and vectors in an array if there is only one file
 vectors_bpms = zip(vectors, bpms)
-# print vectors_bpms
-# arr = np.array([])
+
 arr = []
 for entry in vectors_bpms:
-    # print vector[0]
-    # print vector[1]
     joined = np.append(entry[0], entry[1])
     joined = joined.tolist()
-    # print joined
     arr.append(joined)
-    # arr = np.concatenate((arr, joined), axis=0)
-    # print arr
 
-# print arr
-# results = zip(filenames, vectors, bpms)
+arr = np.array(arr)
 results = zip(filenames, arr)
-#
-print results
 
-# record each tuple as a csv or something
-# figure out how I'll be accessing the tags
+np.savetxt("test.txt", arr)
+print results
