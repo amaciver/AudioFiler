@@ -34,5 +34,27 @@ for entry in vectors_bpms:
 arr = np.array(arr)
 results = zip(filenames, arr)
 
-np.savetxt("test.txt", arr)
-print results
+arr2 = []
+for entry in results:
+    arr2.append(entry[1])
+
+# print results
+# print arr2
+
+##read/write csv file
+# import csv
+# with open("test.csv", "wb") as the_file:
+#     csv.register_dialect("custom", delimiter=" ", skipinitialspace=True)
+#     writer = csv.writer(the_file, dialect="custom")
+#     for tup in results:
+#         writer.writerow(tup)
+#
+# reader = csv.reader(open("test.csv", "rb"), delimiter=' ')
+# for row in reader:
+#     print row
+
+
+## save np object to txt
+np.savetxt("test.txt", arr2)
+load = np.loadtxt("test.txt")
+print (np.array(load)[0])
