@@ -56,5 +56,5 @@ for entry in results:
 
 ## save np object to txt
 np.savetxt("test.txt", arr2)
-load = np.loadtxt("test.txt")
-print (np.array(load)[0])
+# load = np.loadtxt("test.txt")
+# print (np.array(load)[0])
