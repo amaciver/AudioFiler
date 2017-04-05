@@ -191,7 +191,6 @@ for root, directory, files in os.walk('./lastfm_train'):
                 genre = genre3
             else:
                 make_query = False
-
             if make_query:
                 count += 1
                 print(count, file)
@@ -215,6 +214,8 @@ for root, directory, files in os.walk('./lastfm_train'):
                     track = (track_title, track_artist, ACCEPTED_GENRES[genre], preview_url)
                     c.execute('''INSERT INTO tracks(title, artist, genre, preview_url) VALUES(?,?,?,?)''', track)
                 except IndexError:
+                    print('deleted: ' + track_title + ' by ' + track_artist)
+                    os.remove(root + '/' + file)
                     print('deleted: ' + track_title + ' by ' + track_artist + file)
                     os.remove(root + '/' + file)
                 except KeyboardInterrupt:

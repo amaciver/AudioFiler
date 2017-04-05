@@ -1,1 +1,7 @@
-test_data
+.gitignore
+test_data/
+lastfm_train/
+lastfm_train_copy/
+mp3s/
+py2_env/
+lastfm_train.zip

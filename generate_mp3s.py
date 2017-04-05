@@ -4,7 +4,6 @@ import requests
 conn = sqlite3.connect('main.db')
 c = conn.cursor()
 
-
 c.execute('''SELECT id, genre, preview_url from tracks limit 1000''')
 for row in c:
     index = row[0]
