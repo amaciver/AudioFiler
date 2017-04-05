@@ -39,10 +39,10 @@ IMAGE_SIZE = 28
 IMAGE_PIXELS = IMAGE_SIZE * IMAGE_SIZE
 
 
-def inference(images, hidden1_units, hidden2_units):
-  """Build the MNIST model up to where it may be used for inference.
+def inference(audio_vectors, hidden1_units, hidden2_units):
+  """
   Args:
-    images: Images placeholder, from inputs().
+    audio_vectors: Audio Vectors placeholder, from inputs().
     hidden1_units: Size of the first hidden layer.
     hidden2_units: Size of the second hidden layer.
   Returns:
@@ -56,7 +56,7 @@ def inference(images, hidden1_units, hidden2_units):
         name='weights')
     biases = tf.Variable(tf.zeros([hidden1_units]),
                          name='biases')
-    hidden1 = tf.nn.relu(tf.matmul(images, weights) + biases)
+    hidden1 = tf.nn.relu(tf.matmul(audio_vectors, weights) + biases)
   # Hidden 2
   with tf.name_scope('hidden2'):
     weights = tf.Variable(
