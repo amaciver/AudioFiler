@@ -155,8 +155,8 @@ ACCEPTED_GENRES = {
 conn = sqlite3.connect('main.db')
 c = conn.cursor()
 
-c.execute('''DROP TABLE IF EXISTS tracks''')
-c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEXT, genre TEXT, preview_url TEXT)''')
+# c.execute('''DROP TABLE IF EXISTS tracks''')
+# c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEXT, genre TEXT, preview_url TEXT)''')
 # iterate through the directory, check the top 3 tags, and use the first one that is in our list as the genre.
 # if it has none, skip it. Otherwise, send a query to spotify with the title and artist, and retreive the preview URL.
 # if the query to spotify comes back empty, continue to the next one.
@@ -194,7 +194,7 @@ for root, directory, files in os.walk('./lastfm_train'):
 
             if make_query:
                 count += 1
-                print(count)
+                print(count, file)
                 base_url = "https://api.spotify.com/v1/search?q="
                 title = f"track:\"{data['title']}\""
                 if '&' in title:
@@ -217,22 +217,16 @@ for root, directory, files in os.walk('./lastfm_train'):
                 except IndexError:
                     print('deleted: ' + track_title + ' by ' + track_artist + file)
                     os.remove(root + '/' + file)
-                except KeyError:
-                    print(response.text)
-                    print(response.json())
-                    print("not sure what error caused this keyerror")
-                    print(file)
-                    conn.commit()
-                    conn.close()
-                except JSONDecodeError:
-                    conn.commit()
-                    conn.close()
-                    pdb.set_trace()
                 except KeyboardInterrupt:
                     conn.commit()
                     conn.close()
                     print(file)
                     exit(0)
+                except:
+                    conn.commit()
+                    print('deleted: ' + track_title + ' by ' + track_artist + file)
+                    os.remove(root + '/' + file)
+
 
 conn.commit()
 conn.close()
