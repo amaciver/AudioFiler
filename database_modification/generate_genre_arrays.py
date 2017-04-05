@@ -33,15 +33,13 @@ GENRES = {
    'Trance': 25
 }
 
-c.execute('''SELECT genre from tracks''')
+c.execute('''SELECT genre, id from tracks limit 1000''')
 master_array = []
 for row in c:
+    print(row)
     one_hot = [0.] * 26
     genre = row[0]
     index = GENRES[genre]
     one_hot[index] = 1.
     master_array.append(one_hot)
 np.savetxt("genre_tags.txt", master_array)
-
-arr = np.loadtxt("genre_tags.txt")
-print(arr)
