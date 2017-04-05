@@ -1,10 +1,15 @@
 import os
 import json
+import re
 
+def pad(num):
+    while len(num) < 4:
+        num = '0' + num
+    return num
 
-for root, directory, files in os.walk('./lastfm_train/A/Q/M'):
+for root, directory, files in os.walk('./mp3s'):
     for file in files:
         if not file.startswith('.'):
-            with open(root + '/' + file) as data_file:
-                data = json.load(data_file)
-                print(data['title'], data['artist'], file)
+            mp3num = re.search('\d+', str(file)).group(0)
+            mp3num = pad(mp3num)
+            os.rename('./mp3s/' + file, './mp3s/' + mp3num + '.mp3')
