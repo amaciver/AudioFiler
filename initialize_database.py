@@ -104,7 +104,7 @@ ACCEPTED_GENRES = {
     'Punk': 'Punk',
     'Punk Rock': 'Punk',
     'Punk rock': 'Punk',
-    'punk': 'punk',
+    'punk': 'Punk',
     'punk rock': 'Punk',
     'hardcore punk': 'Punk',
     'post-punk': 'Punk',
@@ -155,12 +155,13 @@ ACCEPTED_GENRES = {
 conn = sqlite3.connect('main.db')
 c = conn.cursor()
 
-c.execute('''DROP TABLE IF EXISTS tracks''')
-c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEXT, genre TEXT, preview_url TEXT)''')
+# c.execute('''DROP TABLE IF EXISTS tracks''')
+# c.execute('''CREATE TABLE tracks (id INTEGER PRIMARY KEY, title TEXT, artist TEXT, genre TEXT, preview_url TEXT)''')
 # iterate through the directory, check the top 3 tags, and use the first one that is in our list as the genre.
 # if it has none, skip it. Otherwise, send a query to spotify with the title and artist, and retreive the preview URL.
 # if the query to spotify comes back empty, continue to the next one.
-for root, directory, files in os.walk('./lastfm_train/A/A'):
+count = 0
+for root, directory, files in os.walk('./lastfm_train'):
     for file in files:
         # take care of .ds_store
         if file.startswith('.'):
@@ -192,6 +193,8 @@ for root, directory, files in os.walk('./lastfm_train/A/A'):
                 make_query = False
 
             if make_query:
+                count += 1
+                print(count, file)
                 base_url = "https://api.spotify.com/v1/search?q="
                 title = f"track:\"{data['title']}\""
                 if '&' in title:
@@ -200,12 +203,30 @@ for root, directory, files in os.walk('./lastfm_train/A/A'):
                 if '&' in artist:
                     artist = 'and'.join(artist.split('&'))
                 response = requests.get(base_url + title + "%20" + artist + "&type=track&limit=1")
+                if response.status_code == 429:
+                    print(response.text)
+                    print(response.json())
+                    print("hit 429 level error, committing what we have")
+                    print(file)
+                    conn.commit()
+                    conn.close()
                 try:
                     preview_url = response.json()['tracks']['items'][0]['preview_url']
                     track = (track_title, track_artist, ACCEPTED_GENRES[genre], preview_url)
                     c.execute('''INSERT INTO tracks(title, artist, genre, preview_url) VALUES(?,?,?,?)''', track)
                 except IndexError:
-                    print('deleted: ' + track_title + ' by ' + track_artist)
+                    print('deleted: ' + track_title + ' by ' + track_artist + file)
                     os.remove(root + '/' + file)
+                except KeyboardInterrupt:
+                    conn.commit()
+                    conn.close()
+                    print(file)
+                    exit(0)
+                except:
+                    conn.commit()
+                    print('deleted: ' + track_title + ' by ' + track_artist + file)
+                    os.remove(root + '/' + file)
+
+
 conn.commit()
 conn.close()
