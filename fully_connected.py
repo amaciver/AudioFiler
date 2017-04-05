@@ -158,10 +158,10 @@ def run_training():
 
       # Fill a feed dictionary with the actual set of images and labels
       # for this particular training step.
-      feed_dict = fill_feed_dict(data_sets.train,
-                                 images_placeholder,
-                                 labels_placeholder)
-
+    #   feed_dict = fill_feed_dict(data_sets.train,
+    #                              images_placeholder,
+    #                              labels_placeholder)
+        feed_dict = { }
       # Run one step of the model.  The return values are the activations
       # from the `train_op` (which is discarded) and the `loss` Op.  To
       # inspect the values of your Ops or variables, you may include them
@@ -244,7 +244,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--batch_size',
       type=int,
-      default=100,
+      default=1000,
       help='Batch size.  Must divide evenly into the dataset sizes.'
   )
   parser.add_argument(
