@@ -1,0 +1,3 @@
+[submodule "analysis_backend/helpers/pyAudioAnalysis"]
+	path = analysis_backend/helpers/pyAudioAnalysis
+	url = git://github.com/tyiannak/pyAudioAnalysis.git
