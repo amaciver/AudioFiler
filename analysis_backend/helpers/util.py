@@ -1,13 +1,20 @@
 import requests
 import os
-
+import sys
 # import numpy as np
+
+curpath = os.path.abspath(os.curdir)
+pAApath = os.path.join(curpath, 'helpers/pyAudioAnalysis')
+sys.path.append(pAApath)
+
+from pyAudioAnalysis import audioFeatureExtraction as aF
+from pyAudioAnalysis import audioAnalysis as aA
+from pyAudioAnalysis import audioBasicIO as audioBasicIO
 
 # from analysis_backend.helpers.pyAudioAnalysis.audioFeatureExtraction import *
 # from analysis_backend.helpers.pyAudioAnalysis import audioAnalysis as aA
 # from analysis_backend.helpers.pyAudioAnalysis import audioBasicIO as audioBasicIO
 #
-# import numpy as np
 
 def downloadPreview(url):
     # r = requests.get(preview_url)
