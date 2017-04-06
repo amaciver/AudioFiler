@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from analysis_backend.helpers.util import downloadPreview, extractFeatures
 
 
-def show(spotifyId):
-    # get mp3 from spotify
+
+def show(previewUrl):
+    downloadPreview(previewUrl)
 
     # perform analysis
 
