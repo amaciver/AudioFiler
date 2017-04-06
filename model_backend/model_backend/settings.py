@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # 'django.contrib.admin',
 INSTALLED_APPS = [
+    'webpack_loader',
     'model.apps.ModelConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,4 +119,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/model/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+)
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'assets/bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
