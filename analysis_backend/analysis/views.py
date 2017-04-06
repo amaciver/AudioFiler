@@ -7,5 +7,5 @@ def show(spotifyId):
 
     # perform analysis
 
-    # format json response 
-    return response
+    # format json response
+    return JsonResponse({ 'working?': 'yes'})
