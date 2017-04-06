@@ -1,7 +1,7 @@
 import sqlite3
 import numpy as np
 
-conn = sqlite3.connect('main.db')
+conn = sqlite3.connect("/Volumes/Seagate Expansion Drive/AudioFiler/main.db")
 c = conn.cursor()
 
 GENRES = {
@@ -33,7 +33,7 @@ GENRES = {
    'Trance': 25
 }
 
-c.execute('''SELECT genre, id from tracks limit 1000''')
+c.execute('''SELECT genre, id from tracks''')
 master_array = []
 for row in c:
     print(row)
@@ -42,4 +42,4 @@ for row in c:
     index = GENRES[genre]
     one_hot[index] = 1.
     master_array.append(one_hot)
-np.savetxt("genre_tags.txt", master_array)
+np.savetxt("/Volumes/Seagate Expansion Drive/AudioFiler/one_hot_genre_tags.txt", master_array)
