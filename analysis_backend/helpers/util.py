@@ -1,14 +1,22 @@
 import requests
+import os
+
 # import numpy as np
 
 # from analysis_backend.helpers.pyAudioAnalysis.audioFeatureExtraction import *
 # from analysis_backend.helpers.pyAudioAnalysis import audioAnalysis as aA
 # from analysis_backend.helpers.pyAudioAnalysis import audioBasicIO as audioBasicIO
+#
+# import numpy as np
 
 def downloadPreview(url):
     # r = requests.get(preview_url)
     r = requests.get("https://p.scdn.co/mp3-preview/7c548326fe87f76161403d00bbb3b65b988a2c17?cid=null")
-    with open("./data/preview.mp3", 'wb') as mp3_file:
+
+    curpath = os.path.abspath(os.curdir)
+    mp3_directory = "%s/%s" % ("data","preview.mp3")
+
+    with open(os.path.join(curpath, mp3_directory), 'wb') as mp3_file:
         mp3_file.write(r.content)
 
 
