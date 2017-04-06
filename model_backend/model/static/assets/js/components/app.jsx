@@ -1,9 +1,16 @@
 import React from 'react';
+import MainPageContainer from './main_page/main_page_container';
 
 const App = ({ children }) => (
   <div>
-    { children }
+    <MainPageContainer />
   </div>
 );
 
 export default App;
+
+// <MainPageContainer />
+
+// <div>
+//   { children }
+// </div>
