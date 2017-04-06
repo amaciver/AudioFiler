@@ -1,38 +1,38 @@
-import tensorflow as tf
-import numpy as np
-
-
-genres = np.loadtxt("genre_tags.txt")
-genres_nothot = np.loadtxt("genre_tags_not_one_hot.txt")
-
-subset = np.loadtxt("subset_1000.txt")
-
-na_train = np.array(subset[0:800], dtype="float32")
-labels_train = np.array(genres[0:800], dtype="float32")
-labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
-
-na_test = np.array(subset[800:], dtype="float32")
-labels_test = np.array(genres[800:], dtype="float32")
-labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
-
-
-
-
-# na_test = np.array([a,b,c])
-# labels_test = np.array([[0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-#                     [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
-#                     [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]])
-
-
-hparams = tf.contrib.tensor_forest.python.tensor_forest.ForestHParams(
-        num_trees=3, max_nodes=1000, num_classes=26, num_features=69)
-classifier = tf.contrib.learn.TensorForestEstimator(hparams)
-
-monitors = [tf.contrib.learn.TensorForestLossMonitor(10, 10)]
-classifier.fit(x=na_train, y=labels_train_nothot, steps=100, monitors=monitors)
-classifier.evaluate(x=na_test, y=labels_test_nothot, steps=10)
-
-
+# import tensorflow as tf
+# import numpy as np
+#
+#
+# genres = np.loadtxt("genre_tags.txt")
+# genres_nothot = np.loadtxt("genre_tags_not_one_hot.txt")
+#
+# subset = np.loadtxt("subset_1000.txt")
+#
+# na_train = np.array(subset[0:800], dtype="float32")
+# labels_train = np.array(genres[0:800], dtype="float32")
+# labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
+#
+# na_test = np.array(subset[800:], dtype="float32")
+# labels_test = np.array(genres[800:], dtype="float32")
+# labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
+#
+#
+#
+#
+# # na_test = np.array([a,b,c])
+# # labels_test = np.array([[0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
+# #                     [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
+# #                     [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]])
+#
+#
+# hparams = tf.contrib.tensor_forest.python.tensor_forest.ForestHParams(
+#         num_trees=3, max_nodes=1000, num_classes=26, num_features=69)
+# classifier = tf.contrib.learn.TensorForestEstimator(hparams)
+#
+# monitors = [tf.contrib.learn.TensorForestLossMonitor(10, 10)]
+# classifier.fit(x=na_train, y=labels_train_nothot, steps=100, monitors=monitors)
+# classifier.evaluate(x=na_test, y=labels_test_nothot, steps=10)
+#
+#
 
 ####
    # Copyright 2016 The TensorFlow Authors. All Rights Reserved.
@@ -180,3 +180,39 @@ classifier.evaluate(x=na_test, y=labels_test_nothot, steps=10)
 #   )
 #   FLAGS, unparsed = parser.parse_known_args()
 #   app.run(main=main, argv=[sys.argv[0]] + unparsed)
+
+
+
+
+######
+########
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+import numpy as np
+
+# genres = np.loadtxt("genre_tags.txt")
+subset = np.loadtxt("subset_1000.txt")
+genres_nothot = np.loadtxt("genre_tags_not_one_hot.txt")
+
+na_train = np.array(subset[0:800], dtype="float32")
+labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
+
+na_test = np.array(subset[800:], dtype="float32")
+labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
+
+# iris = load_iris()
+# df = pd.DataFrame(na_train)
+# df['is_train'] = np.random.uniform(0, 1, len(df)) <= .75
+# df['species'] = pd.Factor(iris.target, iris.target_names)
+# df.head()
+
+# train, test = df[df['is_train']==True], df[df['is_train']==False]
+
+# features = df.columns[:69]
+clf = RandomForestClassifier(n_jobs=2)
+# y, _ = pd.factorize(train['species'])
+clf.fit(na_train, labels_train_nothot)
+
+preds = clf.predict(na_test)
+print (pd.crosstab(labels_test_nothot, preds, rownames=['actual'], colnames=['preds']))
