@@ -45,10 +45,13 @@ hidden2_units = 26
 genres = np.loadtxt("genre_tags.txt")
 subset = np.loadtxt("subset_1000.txt")
 # print (len(load))
-na = np.array(subset)
-labels = np.array(genres)
-print(len(na))
-print(len(labels))
+na_train = np.array(subset[0:800], dtype="float32")
+labels_train = np.array(genres[0:800], dtype="float32")
+na_test = np.array(subset[800:], dtype="float32")
+labels_test = np.array(genres[800:], dtype="float32")
+
+print (len(na_train))
+print (len(labels_train))
 
 na_ = np.array([a,b,c])
 
@@ -109,22 +112,23 @@ cross_entropy = tf.reduce_mean(
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
     #create session
-sess = tf.InteractiveSession()
-
+# sess = tf.InteractiveSession()
+saver = tf.train.Saver()
 # sess = tf.Session()
-# with tf.Session() as sess:
+with tf.Session() as sess:
     #initialize variables
-tf.global_variables_initializer().run()
+    tf.global_variables_initializer().run()
 
 
-for _ in range(1000):
-    # batch_xs, batch_ys = mnist.train.next_batch(100)
-    sess.run(train_step, feed_dict={x: na, y_: labels})
-    # print(y.eval())
+    for _ in range(1000):
+        # batch_xs, batch_ys = mnist.train.next_batch(100)
+        sess.run(train_step, feed_dict={x: na_train, y_: labels_train})
+        # print(y.eval())
 
-correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-print(sess.run(y, feed_dict={x: na_, y_: labels_}))
+    correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    print(sess.run(accuracy, feed_dict={x: na_test, y_: labels_test}))
+    save_path = saver.save(sess, './model.ckpt')
 
     # sess.close()
 # sess.close()
