@@ -4,8 +4,8 @@ from helpers import util
 
 
 def show(request, previewUrl):
-    downloadPreview(previewUrl)
+    util.downloadPreview(previewUrl)
 
-    array = extractFeatures()
+    array = util.extractFeatures()
 
-    return JsonResponse({ features: array })
+    return JsonResponse({ 'features': array })
