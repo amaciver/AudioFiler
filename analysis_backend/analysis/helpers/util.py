@@ -32,6 +32,4 @@ def extractFeatures():
     arr = []
     joined = np.append(vectors, bpm())
     joined = joined.tolist()
-    arr.append(joined)
-
-    return arr
+    return joined
