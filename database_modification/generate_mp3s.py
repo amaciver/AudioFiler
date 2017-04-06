@@ -1,7 +1,7 @@
 import sqlite3
 import requests
 
-conn = sqlite3.connect('main.db')
+conn = sqlite3.connect('../main.db')
 c = conn.cursor()
 
 
@@ -9,7 +9,7 @@ def pad(num):
     while len(num) < 6:
         num = '0' + num
     return num
-c.execute('''SELECT id, genre, preview_url from tracks''')
+c.execute('''SELECT id, genre, preview_url from tracks offset 35422''')
 for row in c:
     index = str(row[0])
     genre = row[1]
