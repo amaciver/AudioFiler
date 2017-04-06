@@ -90,4 +90,5 @@ with tf.Session() as sess:
     print('  Num examples: %d  Num correct: %d  Precision @ 3: %0.04f' %
     (num_examples, true_count, precision))
 
+
     # save_path = saver.save(sess, './model.ckpt')
