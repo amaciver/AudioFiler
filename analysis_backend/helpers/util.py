@@ -27,7 +27,7 @@ def bpm():
     BPM, ratio = aF.beatExtraction(F, 0.050, False)
     return BPM
 
-def analyze():
+def extractFeatures():
     vectors, filenames = aF.dirWavFeatureExtraction(os.path.join(curpath, 'data'), 60, 30, 1, 1)
     arr = []
     joined = np.append(vectors, bpm())

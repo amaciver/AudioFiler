@@ -7,7 +7,6 @@ from analysis_backend.helpers.util import downloadPreview, extractFeatures
 def show(previewUrl):
     downloadPreview(previewUrl)
 
-    # perform analysis
+    array = extractFeatures()
 
-    # format json response
-    return JsonResponse({ 'working?': 'yes'})
+    return JsonResponse({ features: array })
