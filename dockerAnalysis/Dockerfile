@@ -21,4 +21,4 @@ EXPOSE 8000
 RUN apt-get -y install ffmpeg libav-tools
 RUN pip install eyed3 pydub six pyparsing cycler packaging hmmlearn functools32
 
-CMD gunicorn analysis_backend.wsgi --bind 0.0.0.0:8000
+CMD gunicorn backend_analysis.wsgi.application --bind 0.0.0.0:$PORT
