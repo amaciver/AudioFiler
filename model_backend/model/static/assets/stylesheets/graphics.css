@@ -1,0 +1,11 @@
+.graphics-wrapper {
+  position: relative;
+  max-height: 200px;
+  overflow: hidden;
+  border-bottom: 1px solid gray;
+}
+
+.background-graphic {
+  width: 100%;
+  opacity: .8;
+}

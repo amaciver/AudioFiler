@@ -12286,7 +12286,12 @@ var Graphics = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'graphics-wrapper' },
+        _react2.default.createElement(
+          'div',
+          { className: 'graphics-background' },
+          _react2.default.createElement('img', { className: 'background-graphic', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491594643/neural-background_nx9aup.jpg' })
+        ),
         _react2.default.createElement(
           'h2',
           null,
@@ -12448,10 +12453,30 @@ var MainPage = function (_React$Component) {
         { className: 'main-wrapper' },
         _react2.default.createElement(_header2.default, null),
         _react2.default.createElement(_graphics_container2.default, null),
-        _react2.default.createElement(_search_container2.default, null),
-        _react2.default.createElement(_animation2.default, null),
-        _react2.default.createElement(_results2.default, null),
-        _react2.default.createElement(_about2.default, null)
+        _react2.default.createElement(
+          'div',
+          { className: 'ux-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-1-3 left-pane' },
+            _react2.default.createElement(_search_container2.default, null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-1-3 left-pane' },
+            _react2.default.createElement(_animation2.default, null)
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-1-3 left-pane' },
+            _react2.default.createElement(_results2.default, null)
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'bottom-tab' },
+          _react2.default.createElement(_about2.default, null)
+        )
       );
     }
   }]);

@@ -17,10 +17,21 @@ class MainPage extends React.Component {
 
         <Header />
         <GraphicsContainer />
-        <SearchContainer />
-        <Animation />
-        <ResultsContainer />
-        <About />
+        <div className='ux-wrapper'>
+          <div className='col-1-3 left-pane'>
+            <SearchContainer />
+          </div>
+          <div className='col-1-3 left-pane'>
+            <Animation />
+          </div>
+          <div className='col-1-3 left-pane'>
+            <ResultsContainer />
+          </div>
+        </div>
+        <div className='bottom-tab'>
+
+          <About />
+        </div>
       </div>
     )
   }

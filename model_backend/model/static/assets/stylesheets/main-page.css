@@ -1,0 +1,23 @@
+.main-wrapper {
+
+}
+
+.ux-wrapper {
+  padding: 30px;
+  display: flex;
+  position: relative;
+
+}
+
+.bottom-tab {
+  position: absolute;
+  bottom: 15px;
+  left: 48vw;
+
+
+}
+
+.left-pane {
+  display: flex;
+  justify-content: center;
+}

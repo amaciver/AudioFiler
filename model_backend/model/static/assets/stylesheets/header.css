@@ -14,12 +14,14 @@
 .header-title {
   font-family: 'Bungee Hairline', cursive;
   font-size: 50px;
+  position: relative;
+  
 }
 
 .links-wrapper {
   position: absolute;
-  align-items: flex-end;
-
+  right: -70;
+  top: 9px;
 }
 
 .links {
