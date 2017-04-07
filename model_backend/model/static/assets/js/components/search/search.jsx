@@ -119,6 +119,9 @@ class Search extends React.Component {
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
+              highlightFirstSuggestion={true}
+              alwaysRenderSuggestions={false}
+              focusInputOnSuggestionClick={false}
               inputProps={inputProps}
               renderInputComponent={renderInputComponent}
             />
