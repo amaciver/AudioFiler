@@ -12463,14 +12463,33 @@ var _search = __webpack_require__(143);
 
 var _search2 = _interopRequireDefault(_search);
 
+var _tracks_actions = __webpack_require__(45);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  var tracks = void 0;
+  if (state.tracks.tracks) {
+    tracks = Object.keys(state.tracks.tracks.items).map(function (key) {
+      return {
+        track: state.tracks.tracks.items[key].name,
+        artist: state.tracks.tracks.items[key].artists[0].name,
+        url: state.tracks.tracks.items[key].preview_url
+      };
+    });
+  }
+  console.log(tracks);
+  return {
+    tracks: tracks
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchTracks: function fetchTracks(query_string) {
+      return dispatch((0, _tracks_actions.fetchTracks)(query_string));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_search2.default);
@@ -12754,7 +12773,7 @@ var fetchTracks = exports.fetchTracks = function fetchTracks(query_string) {
 
   return $.ajax({
     method: 'GET',
-    url: 'https://api.spotify.com/v1/search?q=track:' + query_string + '&type=track'
+    url: 'https://api.spotify.com/v1/search?q=track:' + query_string + '&type=track&limit=5'
   });
 };
 
