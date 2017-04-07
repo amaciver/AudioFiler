@@ -103,7 +103,7 @@ with tf.Session() as sess:
 
     z = (a[0]-amin)/(amax-amin)
     p = z/z.sum()
-    p = np.round(p, 2)*100
+    p = np.round(p, 3)
     print (amin)
     print (amax)
     print (a)
@@ -112,4 +112,4 @@ with tf.Session() as sess:
 
 
 
-    # save_path = saver.save(sess, './model.ckpt')
+    save_path = saver.save(sess, './trained_model/model.ckpt')
