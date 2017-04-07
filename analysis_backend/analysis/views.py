@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from analysis_backend.helpers.util import downloadPreview, extractFeatures
+from helpers import util
 
 
+def show(request, previewUrl):
+    util.downloadPreview(previewUrl)
 
-def show(previewUrl):
-    downloadPreview(previewUrl)
+    array = util.extractFeatures()
 
-    array = extractFeatures()
-
-    return JsonResponse({ features: array })
+    return JsonResponse({ 'features': array })
