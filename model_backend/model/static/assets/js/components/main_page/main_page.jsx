@@ -13,10 +13,8 @@ class MainPage extends React.Component {
 
   render() {
     return(
-      <div>
-        <h1>
-          Main Page, Jerk.
-        </h1>
+      <div className='main-wrapper'>
+
         <Header />
         <GraphicsContainer />
         <SearchContainer />

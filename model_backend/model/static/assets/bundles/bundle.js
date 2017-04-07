@@ -12353,9 +12353,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Header = function Header() {
   return _react2.default.createElement(
-    'h2',
-    null,
-    'Header'
+    'div',
+    { className: 'header-wrapper' },
+    _react2.default.createElement(
+      'div',
+      { className: 'header' },
+      _react2.default.createElement(
+        'div',
+        { className: 'header-title' },
+        'AudioFiler',
+        _react2.default.createElement(
+          'div',
+          { className: 'links-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'links' },
+            _react2.default.createElement(
+              'a',
+              { href: 'https://github.com/amaciver/AudioFiler' },
+              _react2.default.createElement('img', { className: 'link-img', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491592922/github-logo_dutwf3.png', alt: 'github' })
+            )
+          )
+        )
+      )
+    )
   );
 };
 
@@ -12424,12 +12445,7 @@ var MainPage = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Main Page, Jerk.'
-        ),
+        { className: 'main-wrapper' },
         _react2.default.createElement(_header2.default, null),
         _react2.default.createElement(_graphics_container2.default, null),
         _react2.default.createElement(_search_container2.default, null),
