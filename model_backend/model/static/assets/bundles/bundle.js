@@ -12754,8 +12754,7 @@ var fetchTracks = exports.fetchTracks = function fetchTracks(query_string) {
 
   return $.ajax({
     method: 'GET',
-    url: 'https://api.spotify.com/v1/search?type=track',
-    data: { query_string: query_string }
+    url: 'https://api.spotify.com/v1/search?q=track:' + query_string + '&type=track'
   });
 };
 
