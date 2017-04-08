@@ -12466,7 +12466,7 @@ var MainPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'instructions-content' },
-              'Test out our trained model by selecting a song, and it will analyze its audio features to tell you the genre it appears to be.'
+              'Select a song and our trained model will analyze it and tell you the genre it appears to be.'
             )
           ),
           _react2.default.createElement(
@@ -12637,47 +12637,37 @@ var Search = function (_React$Component) {
 
   _createClass(Search, [{
     key: 'componentWillMount',
-    value: function componentWillMount() {
-      // if (!this.props.cities.length > 0) {
-      //   this.props.fetchCities();
-      // }
-    }
+    value: function componentWillMount() {}
   }, {
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      // if (this.props.cities.length !== nextProps.cities.length) {
-      //   this.setState({suggestions: nextProps.cities})
-      // }
-    }
+    value: function componentWillReceiveProps(nextProps) {}
   }, {
     key: 'onChange',
     value: function onChange(event, _ref) {
       var _this2 = this;
 
-      var newValue = _ref.newValue;
+      var newValue = _ref.newValue,
+          method = _ref.method;
 
-      this.props.fetchTracks(newValue).then(function () {
-        _this2.setState({
-          value: newValue,
-          suggestions: _this2.props.tracks
-        });
-      });
+      switch (method) {
+        case 'type':
+          this.props.fetchTracks(newValue).then(function () {
+            _this2.setState({
+              value: newValue,
+              suggestions: _this2.props.tracks
+            });
+          });
+        default:
+          this.setState({
+            value: newValue
+          });
+      }
     }
   }, {
     key: 'handleSubmit',
-    value: function handleSubmit() {}
-    // const match = (this.props.cities.filter(city =>
-    //   city.name.toLowerCase() === this.state.value.toLowerCase()));
-    //
-    // if (match.length === 1) {
-    //   const id = match[0].id;
-    //   hashHistory.push(`/cities/${id}`);
-    // }
-
-
-    // Autosuggest will call this function every time you need to update suggestions.
-    // You already implemented this logic above, so just use it.
-
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
   }, {
     key: 'onSuggestionsFetchRequested',
     value: function onSuggestionsFetchRequested(_ref2) {
@@ -12687,9 +12677,6 @@ var Search = function (_React$Component) {
         suggestions: this._getSuggestions(value)
       });
     }
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-
   }, {
     key: 'onSuggestionsClearRequested',
     value: function onSuggestionsClearRequested() {
@@ -12703,9 +12690,6 @@ var Search = function (_React$Component) {
       var inputValue = value.trim().toLowerCase();
       var inputLength = inputValue.length;
       return this.state.suggestions;
-      // return inputLength === 0 ? [] : this.props.tracks.filter(city =>
-      //   city.name.toLowerCase().slice(0, inputLength) === inputValue
-      // );
     }
   }, {
     key: 'render',

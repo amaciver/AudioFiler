@@ -34,45 +34,37 @@ class Search extends React.Component {
   }
 
   componentWillMount() {
-    // if (!this.props.cities.length > 0) {
-    //   this.props.fetchCities();
-    // }
   }
 
   componentWillReceiveProps(nextProps) {
-    // if (this.props.cities.length !== nextProps.cities.length) {
-    //   this.setState({suggestions: nextProps.cities})
-    // }
   }
 
-  onChange(event, { newValue }){
-    this.props.fetchTracks(newValue).then( () => {
-      this.setState({
-        value: newValue,
-        suggestions: this.props.tracks
-      })
-    })
+  onChange(event, { newValue, method }) {
+    switch (method) {
+      case 'type':
+        this.props.fetchTracks(newValue).then( () => {
+          this.setState({
+            value: newValue,
+            suggestions: this.props.tracks
+          })
+        })
+      default:
+        this.setState({
+          value: newValue
+        })
+    }
   }
 
-  handleSubmit(){
-    // const match = (this.props.cities.filter(city =>
-    //   city.name.toLowerCase() === this.state.value.toLowerCase()));
-    //
-    // if (match.length === 1) {
-    //   const id = match[0].id;
-    //   hashHistory.push(`/cities/${id}`);
-    // }
+  handleSubmit(e){
+    e.preventDefault();
   }
 
-  // Autosuggest will call this function every time you need to update suggestions.
-  // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested({ value }) {
     this.setState({
       suggestions: this._getSuggestions(value)
     });
   }
 
-  // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested() {
     this.setState({
       suggestions: []
@@ -83,9 +75,6 @@ class Search extends React.Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     return this.state.suggestions;
-    // return inputLength === 0 ? [] : this.props.tracks.filter(city =>
-    //   city.name.toLowerCase().slice(0, inputLength) === inputValue
-    // );
   };
 
 

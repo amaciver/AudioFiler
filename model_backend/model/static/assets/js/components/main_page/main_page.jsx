@@ -21,9 +21,8 @@ class MainPage extends React.Component {
 
           <div className='instructions-wrapper'>
             <div className='instructions-content'>
-              Test out our trained model by selecting a song, and
-              it will analyze its audio features to
-              tell you the genre it appears to be.
+              Select a song and our trained model
+              will analyze it and tell you the genre it appears to be.
             </div>
           </div>
 
