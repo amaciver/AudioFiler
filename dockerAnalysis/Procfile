@@ -1,3 +1,2 @@
-from analysis_backend.wsgi import application
 
-web: gunicorn application --bind 0.0.0.0:$PORT
+web: gunicorn analysis_backend.wsgi --bind 0.0.0.0:$PORT
