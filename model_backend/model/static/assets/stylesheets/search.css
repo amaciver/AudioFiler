@@ -3,7 +3,12 @@
 }
 
 .search-title {
-
+  height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #606060;
+  font-size: 30px;
 }
 
 .search-form {
@@ -15,22 +20,24 @@
   padding-right: 10px;
   width: auto;
   text-align: left;
-  width: 200px;
+  width: 240px;
   margin: 12px auto;
   margin-bottom: 15px;
 }
 
 .search-oval {
-  height: 30px;
+  height: 37px;
   vertical-align: top;
   box-sizing: border-box;
-  width: 180px;
+  width: 243px;
   display: flex;
-
   border: 0;
   border-radius: 0;
   min-height: 0;
   padding: 0;
+  align-items: center;
+  /*padding-bottom: 5px;*/
+  justify-content: space-between;
 }
 
 /*.search-field {
@@ -48,20 +55,31 @@
   margin-bottom: 0;
 }
 
+.search-submit {
+  border: none;
+  background: none;
+  color: #b0b0b0;
+}
+.search-submit:hover {
+  cursor: pointer;
+}
+
 .react-autosuggest__container {
-  padding: 5px;
+  /*padding: 5px;*/
 }
 .react-autosuggest__container input{
-  padding-top: 4px;
+  /*padding-top: 4px;*/
+  padding: 5px;
   font-size: 12px;
   border: none;
-  height: 20px;
-  width: 180px;
+  height: 35px;
+  width: 210px;
+  outline: none;
 }
 
 
 .react-autosuggest__suggestions-list {
-  width: 180px;
+  /*width: 180px;*/
   z-index: 1;
   margin-left: 0px;
 }

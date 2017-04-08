@@ -13,8 +13,7 @@ const getSuggestionValue = suggestion => suggestion.track;
 
 const renderSuggestion = suggestion => (
   <div className='search-list-item'>
-    {suggestion.track}
-    {suggestion.artist}
+    {suggestion.track} by {suggestion.artist}
 
   </div>
 );

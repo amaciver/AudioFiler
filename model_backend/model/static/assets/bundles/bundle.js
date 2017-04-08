@@ -12610,6 +12610,7 @@ var renderSuggestion = function renderSuggestion(suggestion) {
     'div',
     { className: 'search-list-item' },
     suggestion.track,
+    ' by ',
     suggestion.artist
   );
 };
