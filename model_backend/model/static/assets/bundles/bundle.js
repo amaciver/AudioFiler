@@ -12194,11 +12194,11 @@ var Animation = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'animation-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'Animation'
+          'div',
+          { className: 'animation-title' },
+          'Animations'
         )
       );
     }
@@ -12524,6 +12524,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _results_chart = __webpack_require__(368);
+
+var _results_chart2 = _interopRequireDefault(_results_chart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12546,11 +12550,16 @@ var Results = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'results-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
+          'div',
+          { className: 'results-title' },
           'Results'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'results-chart-wrapper' },
+          _react2.default.createElement(_results_chart2.default, null)
         )
       );
     }
@@ -42133,6 +42142,101 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResultsChart = function ResultsChart() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'results-chart' },
+    _react2.default.createElement(
+      'div',
+      { className: 'results-chart-header' },
+      'Your song sounds like:'
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'results-chart-list' },
+      _react2.default.createElement(
+        'table',
+        null,
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'th',
+            null,
+            'Genre'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Confidence'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Rock'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '80%'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Metal'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '14%'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Pop'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '6%'
+          )
+        )
+      )
+    )
+  );
+};
+
+exports.default = ResultsChart;
 
 /***/ })
 /******/ ]);

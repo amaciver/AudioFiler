@@ -45,11 +45,13 @@
 }
 
 .left-pane {
-
+  display: flex;
+  justify-content: center;
 }
 
 .middle-pane {
-
+  display: flex;
+  justify-content: center;
 }
 
 .right-pane {
@@ -90,9 +92,4 @@
   box-shadow: 0px 0px 6px 0px grey;
   cursor: pointer;
   opacity: 1;
-}
-
-.left-pane {
-  display: flex;
-  justify-content: center;
 }

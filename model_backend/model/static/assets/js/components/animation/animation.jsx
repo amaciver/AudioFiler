@@ -7,8 +7,8 @@ class Animation extends React.Component {
 
   render() {
     return(
-      <div>
-        <h2>Animation</h2>
+      <div className='animation-wrapper'>
+        <div className='animation-title'>Animations</div>
       </div>
     )
   }

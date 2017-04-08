@@ -38,6 +38,7 @@
   align-items: center;
   /*padding-bottom: 5px;*/
   justify-content: space-between;
+  position: relative;
 }
 
 /*.search-field {
@@ -59,6 +60,7 @@
   border: none;
   background: none;
   color: #b0b0b0;
+  outline: none;
 }
 .search-submit:hover {
   cursor: pointer;
@@ -80,8 +82,11 @@
 
 .react-autosuggest__suggestions-list {
   /*width: 180px;*/
+  word-wrap: normal;
   z-index: 1;
   margin-left: 0px;
+  position: absolute;
+  top: 45px;
 }
 
 .react-autosuggest__suggestion {
@@ -89,7 +94,7 @@
   color: #BFBFBF;
   padding-left: 5px;
   font-weight: normal;
-  width: 180px;
+  min-width: 200px;
   z-index: 1;
   line-height: 30px;
   border-bottom: 1px solid #ecf0f1;

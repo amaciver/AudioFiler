@@ -1,4 +1,5 @@
 import React from 'react';
+import ResultsChart from './results_chart';
 
 class Results extends React.Component {
   constructor(props) {
@@ -7,8 +8,12 @@ class Results extends React.Component {
 
   render() {
     return(
-      <div>
-        <h2>Results</h2>
+      <div className='results-wrapper'>
+        <div className='results-title'>Results</div>
+        <div className='results-chart-wrapper'>
+          <ResultsChart />
+        </div>
+
       </div>
     )
   }

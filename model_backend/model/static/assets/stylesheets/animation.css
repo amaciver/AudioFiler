@@ -1,0 +1,12 @@
+.animation-wrapper {
+
+}
+
+.animation-title {
+    height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #606060;
+    font-size: 30px;
+}
