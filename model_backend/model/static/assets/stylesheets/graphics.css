@@ -9,3 +9,34 @@
   width: 100%;
   opacity: .8;
 }
+
+.subtitle-wrapper {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.subtitle-content {
+  /*width: 411px;*/
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  background: white;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  /*height: 25px;*/
+  height: 34px;
+  align-items: center;
+  padding-bottom: 2px;
+  box-sizing: border-box;
+  color: rgba(128, 128, 128, 0.51);
+  font-weight: 200;
+  font-size: 21px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

@@ -109,7 +109,8 @@ class Search extends React.Component {
 
     return(
       <div className='search-wrapper'>
-        <h2>Search</h2>
+        <div className='search-title'>Search</div>
+
         <form className='search-form' onSubmit={this.handleSubmit}>
           <div className='search-oval'>
             <Autosuggest
@@ -130,7 +131,7 @@ class Search extends React.Component {
               title="Search"
               type='submit'>
 
-
+              <i className="fa fa-search fa-2x" aria-hidden="true"></i>
             </button>
           </div>
         </form>

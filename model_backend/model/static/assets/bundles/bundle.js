@@ -12289,13 +12289,17 @@ var Graphics = function (_React$Component) {
         { className: 'graphics-wrapper' },
         _react2.default.createElement(
           'div',
-          { className: 'graphics-background' },
-          _react2.default.createElement('img', { className: 'background-graphic', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491594643/neural-background_nx9aup.jpg' })
+          { className: 'subtitle-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'subtitle-content' },
+            'Machine Learning Song Classifier'
+          )
         ),
         _react2.default.createElement(
-          'h2',
-          null,
-          'Graphics'
+          'div',
+          { className: 'graphics-background' },
+          _react2.default.createElement('img', { className: 'background-graphic', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491594643/neural-background_nx9aup.jpg' })
         )
       );
     }
@@ -12458,24 +12462,41 @@ var MainPage = function (_React$Component) {
           { className: 'ux-wrapper' },
           _react2.default.createElement(
             'div',
-            { className: 'col-1-3 left-pane' },
-            _react2.default.createElement(_search_container2.default, null)
+            { className: 'instructions-wrapper' },
+            _react2.default.createElement(
+              'div',
+              { className: 'instructions-content' },
+              'Test out our trained model by selecting a song, and it will analyze its audio features to tell you the genre it appears to be.'
+            )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-1-3 left-pane' },
-            _react2.default.createElement(_animation2.default, null)
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-1-3 left-pane' },
-            _react2.default.createElement(_results2.default, null)
+            { className: 'ux-content' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 left-pane' },
+              _react2.default.createElement(_search_container2.default, null)
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 middle-pane' },
+              _react2.default.createElement(_animation2.default, null)
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 right-pane' },
+              _react2.default.createElement(_results2.default, null)
+            )
           )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'bottom-tab' },
-          _react2.default.createElement(_about2.default, null)
+          { className: 'footer-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'bottom-tab' },
+            _react2.default.createElement(_about2.default, null)
+          )
         )
       );
     }
@@ -12713,8 +12734,8 @@ var Search = function (_React$Component) {
         'div',
         { className: 'search-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
+          'div',
+          { className: 'search-title' },
           'Search'
         ),
         _react2.default.createElement(
@@ -12736,10 +12757,14 @@ var Search = function (_React$Component) {
               inputProps: inputProps,
               renderInputComponent: renderInputComponent
             }),
-            _react2.default.createElement('button', {
-              className: 'search-submit',
-              title: 'Search',
-              type: 'submit' })
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'search-submit',
+                title: 'Search',
+                type: 'submit' },
+              _react2.default.createElement('i', { className: 'fa fa-search fa-2x', 'aria-hidden': 'true' })
+            )
           )
         )
       );

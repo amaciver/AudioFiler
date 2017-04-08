@@ -1,0 +1,83 @@
+.search-wrapper {
+
+}
+
+.search-title {
+
+}
+
+.search-form {
+  border: 1px solid #aeb5ba;
+  border-radius: 50px;
+  display: inline-block;
+  min-height: 37px;
+  padding-left: 12px;
+  padding-right: 10px;
+  width: auto;
+  text-align: left;
+  width: 200px;
+  margin: 12px auto;
+  margin-bottom: 15px;
+}
+
+.search-oval {
+  height: 30px;
+  vertical-align: top;
+  box-sizing: border-box;
+  width: 180px;
+  display: flex;
+
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+/*.search-field {
+  padding-top: 4px;
+  font-size: 12px;
+  border: none;
+  height: 20px;
+  width: 180px;
+}*/
+
+.search-list-item {
+  background: white;
+  width: 180px;
+  z-index: 1;
+  margin-bottom: 0;
+}
+
+.react-autosuggest__container {
+  padding: 5px;
+}
+.react-autosuggest__container input{
+  padding-top: 4px;
+  font-size: 12px;
+  border: none;
+  height: 20px;
+  width: 180px;
+}
+
+
+.react-autosuggest__suggestions-list {
+  width: 180px;
+  z-index: 1;
+  margin-left: 0px;
+}
+
+.react-autosuggest__suggestion {
+  background: white;
+  color: #BFBFBF;
+  padding-left: 5px;
+  font-weight: normal;
+  width: 180px;
+  z-index: 1;
+  line-height: 30px;
+  border-bottom: 1px solid #ecf0f1;
+  margin-bottom: 0;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  color: black;
+}
