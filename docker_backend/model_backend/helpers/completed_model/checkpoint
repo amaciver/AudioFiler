@@ -1,0 +1,2 @@
+model_checkpoint_path: "/Users/alecjohnson/Desktop/AudioFiler/model/completed_model/model.ckpt"
+all_model_checkpoint_paths: "/Users/alecjohnson/Desktop/AudioFiler/model/completed_model/model.ckpt"
