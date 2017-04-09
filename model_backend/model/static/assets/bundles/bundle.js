@@ -12186,19 +12186,72 @@ var Animation = function (_React$Component) {
   function Animation(props) {
     _classCallCheck(this, Animation);
 
-    return _possibleConstructorReturn(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, props));
+
+    _this.state = {
+      visible: false,
+      fading: false
+    };
+    _this.switchVisible = _this.switchVisible.bind(_this);
+    return _this;
   }
 
   _createClass(Animation, [{
+    key: 'fadein',
+    value: function fadein() {}
+  }, {
+    key: 'fadeout',
+    value: function fadeout() {}
+  }, {
+    key: 'switchVisible',
+    value: function switchVisible() {
+      var _this2 = this;
+
+      if (this.state.visible === false) {
+        this.setState({ visible: true, fading: false });
+      } else {
+        this.setState({ fading: true }, function () {
+          setTimeout(function () {
+            _this2.setState({ visible: false });
+            _this2.setState({ fading: false });
+          }, 3000);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var fadeClass = "";
+      if (this.state.visible === false) {
+        fadeClass = 'animation-wrapper hidden';
+      }
+      if (this.state.visible === true) {
+        fadeClass = 'animation-wrapper';
+      }
+      if (this.state.fading === true) {
+        fadeClass = 'animation-wrapper fade-out';
+      }
       return _react2.default.createElement(
         'div',
-        { className: 'animation-wrapper' },
+        null,
         _react2.default.createElement(
           'div',
-          { className: 'animation-title' },
-          'Animations'
+          { className: fadeClass },
+          _react2.default.createElement(
+            'div',
+            { className: 'animation-title' },
+            'Working...'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'brain-wrapper' },
+            _react2.default.createElement('div', { id: 'circuit-brain' })
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.switchVisible },
+          'switch'
         )
       );
     }
@@ -12208,6 +12261,12 @@ var Animation = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Animation;
+
+// <div className='brain-wrapper'>
+//   <img className='brain' src='http://res.cloudinary.com/couchsmurfing/image/upload/v1491690862/brain-gear_yx26tx.png' />
+// </div>
+
+// <div id='loading-brain'></div>
 
 /***/ }),
 /* 139 */
