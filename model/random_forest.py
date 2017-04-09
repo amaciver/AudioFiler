@@ -1,5 +1,6 @@
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.externals import joblib
 import pandas as pd
 import numpy as np
 
@@ -109,6 +110,7 @@ for i in range(0, 20):
     print (preds)
     print("hellloooooooooooooo")
     classifications.append(preds[0])
+    joblib.dump(clf, "./trained_forest/model_%(i)s.pk1" % locals())
 
 print (classifications)
 
