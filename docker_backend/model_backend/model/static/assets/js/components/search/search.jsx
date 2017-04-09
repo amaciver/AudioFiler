@@ -42,10 +42,11 @@ class Search extends React.Component {
   onChange(event, { newValue, method }) {
     switch (method) {
       case 'type':
-        this.props.fetchTracks(newValue).then( () => {
-          this.setState({
-            value: newValue,
-            suggestions: this.props.tracks
+        this.setState({value: newValue}, () => {
+          this.props.fetchTracks(newValue).then( () => {
+            this.setState({
+              suggestions: this.props.tracks
+            })
           })
         })
       default:

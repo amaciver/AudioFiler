@@ -4,7 +4,7 @@ import Search from './search';
 import { fetchTracks } from '../../actions/tracks_actions';
 
 const mapStateToProps = (state) => {
-  let tracks;
+  let tracks = [];
   if (state.tracks.tracks) {
     tracks = Object.keys(state.tracks.tracks.items).map( (key) => {
       return (
@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
       )
     });
   }
-  console.log(tracks);
+  // console.log(tracks);
   return ({
     tracks: tracks
   });
