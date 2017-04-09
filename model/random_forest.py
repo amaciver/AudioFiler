@@ -200,24 +200,23 @@ import numpy as np
 #
 # na_test = np.array(subset[800:], dtype="float32")
 # labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
-
-
-genres_nothot = np.loadtxt("/Volumes/Seagate Expansion Drive/AudioFiler/single_num_genre_tags.txt")
+genres_nothot = np.loadtxt("../data/single_num_genre_tags.txt")
 
 # subset = np.loadtxt("subset_1000.txt")
-na_train = np.array(np.loadtxt(f"/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_1.txt"), dtype="float32")
-na_test = np.array(np.loadtxt(f"/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_24.txt"), dtype="float32")
+na_train = np.array(np.loadtxt(f"../data/batches/batch_1.txt"), dtype="float32")
+na_test = np.array(np.loadtxt(f"../data/batches/batch_24.txt"), dtype="float32")
 
 for i in range(2, 24):
-    data = np.loadtxt(f"/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_{i}.txt")
+    data = np.loadtxt(f"../data/batches/batch_{i}.txt")
     na_train = np.concatenate((na_train, data))
 
 for i in range(25, 29):
-    data = np.loadtxt(f"/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_{i}.txt")
+    data = np.loadtxt(f"../data/batches/batch_{i}.txt")
     na_test = np.concatenate((na_test, data))
 
 labels_train_nothot = np.array(genres_nothot[0:len(na_train)], dtype="int32")
 labels_test_nothot = np.array(genres_nothot[len(na_train):], dtype="int32")
+
 # na_train = np.array(subset[0:800], dtype="float32")
 # labels_train = np.array(genres[0:800], dtype="float32")
 # labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
