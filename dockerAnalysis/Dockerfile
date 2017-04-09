@@ -21,6 +21,8 @@ EXPOSE 8000
 RUN apt-get -y install ffmpeg libav-tools
 RUN pip install eyed3 pydub six pyparsing cycler packaging hmmlearn functools32
 
+RUN chmod -R 777 /opt/analysis_backend/data
+
 RUN useradd -m myuser
 USER myuser
 
