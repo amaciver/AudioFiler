@@ -1,6 +1,7 @@
 import numpy as np
 import tensorflow as tf
 import math
+import os
 
 NUM_CLASSES = 26
 AUDIO_FEATURES = 69
@@ -18,18 +19,18 @@ genres_nothot = np.loadtxt("data/single_num_genre_tags.txt")
 
 # subset = np.loadtxt("subset_1000.txt")
 na_train = np.array(np.loadtxt(f"data/batches/batch_1.txt"), dtype="float32")
-na_test = np.array(np.loadtxt(f"data/batches/batch_24.txt"), dtype="float32")
+# na_test = np.array(np.loadtxt(f"data/batches/batch_24.txt"), dtype="float32")
 
-for i in range(2, 24):
+for i in range(2, 29):
     data = np.loadtxt(f"data/batches/batch_{i}.txt")
     na_train = np.concatenate((na_train, data))
 
-for i in range(25, 29):
-    data = np.loadtxt(f"data/batches/batch_{i}.txt")
-    na_test = np.concatenate((na_test, data))
+# for i in range(25, 29):
+#     data = np.loadtxt(f"data/batches/batch_{i}.txt")
+#     na_test = np.concatenate((na_test, data))
 
 labels_train_nothot = np.array(genres_nothot[0:len(na_train)], dtype="int32")
-labels_test_nothot = np.array(genres_nothot[len(na_train):], dtype="int32")
+# labels_test_nothot = np.array(genres_nothot[len(na_train):], dtype="int32")
 # na_train = np.array(subset[0:800], dtype="float32")
 # labels_train = np.array(genres[0:800], dtype="float32")
 # labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
@@ -40,8 +41,8 @@ labels_test_nothot = np.array(genres_nothot[len(na_train):], dtype="int32")
 
 print (len(na_train))
 print (len(labels_train_nothot))
-print (len(na_test))
-print (len(labels_test_nothot))
+# print (len(na_test))
+# print (len(labels_test_nothot))
 
 
 # naive model
@@ -103,28 +104,27 @@ with tf.Session() as sess:
     # accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     # print(sess.run((y, accuracy), feed_dict={x: na_test, y_: labels_test}))
 
-    correct = tf.nn.in_top_k(y, y_nothot, 5)
-    eval_correct = tf.reduce_sum(tf.cast(correct, tf.int32))
-    num_examples = 8251
-    true_count = 0  # Counts the number of correct predictions.
-    true_count += sess.run(eval_correct, feed_dict={x: na_test, y_nothot: labels_test_nothot})
-    precision = float(true_count) / num_examples
-    print('  Num examples: %d  Num correct: %d  Precision @ 5: %0.04f' %
-    (num_examples, true_count, precision))
-    a = (sess.run(y, feed_dict={x: b, y_nothot: [13]}))
-    a = np.array(a)
-    amin = a[0].min()
-    amax = a[0].max()
+    # correct = tf.nn.in_top_k(y, y_nothot, 5)
+    # eval_correct = tf.reduce_sum(tf.cast(correct, tf.int32))
+    # num_examples = 8251
+    # true_count = 0  # Counts the number of correct predictions.
+    # true_count += sess.run(eval_correct, feed_dict={x: na_test, y_nothot: labels_test_nothot})
+    # precision = float(true_count) / num_examples
+    # print('  Num examples: %d  Num correct: %d  Precision @ 5: %0.04f' %
+    # (num_examples, true_count, precision))
+    # a = (sess.run(y, feed_dict={x: b, y_nothot: [13]}))
+    # a = np.array(a)
+    # amin = a[0].min()
+    # amax = a[0].max()
+    #
+    # z = (a[0]-amin)/(amax-amin)
+    # p = z/z.sum()
+    # p = np.round(p, 3)
+    # print (amin)
+    # print (amax)
+    # print (a)
+    # print (z)
+    # print (p)
 
-    z = (a[0]-amin)/(amax-amin)
-    p = z/z.sum()
-    p = np.round(p, 3)
-    print (amin)
-    print (amax)
-    print (a)
-    print (z)
-    print (p)
 
-
-
-    # save_path = saver.save(sess, './trained_model/model.ckpt')
+    save_path = saver.save(sess, os.path.dirname(os.path.realpath(__file__)) + '/completed_model/model.ckpt')

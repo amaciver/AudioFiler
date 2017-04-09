@@ -1,7 +1,18 @@
+import os
+import sys
+import requests
+import numpy as np
+
+curpath = os.path.abspath(os.curdir)
+tf_path = os.path.join(curpath, 'helpers/tensorflow')
+model_path = os.path.join(curpath, 'helpers/completed_model')
+sys.path.append(tf_path)
+sys.path.append(model_path)
+
 import tensorflow as tf
 import numpy as np
 import math
-import stats from scipy
+from scipy import stats
 import os
 
 # test object
@@ -73,7 +84,7 @@ def run_model(vector):
       p = np.round(p, 3)
 
       # Get top four indices and sort
-      ind = np.argpartition(z, -4)[-4:]
+      ind = np.argpartition(z, -5)[-5:]
       sort = np.flipud(ind[np.argsort(z[ind])])
 
     #   # Z-scores, StdDev and Prints
