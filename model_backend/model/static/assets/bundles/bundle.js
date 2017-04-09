@@ -12186,19 +12186,72 @@ var Animation = function (_React$Component) {
   function Animation(props) {
     _classCallCheck(this, Animation);
 
-    return _possibleConstructorReturn(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Animation.__proto__ || Object.getPrototypeOf(Animation)).call(this, props));
+
+    _this.state = {
+      visible: false,
+      fading: false
+    };
+    _this.switchVisible = _this.switchVisible.bind(_this);
+    return _this;
   }
 
   _createClass(Animation, [{
+    key: 'fadein',
+    value: function fadein() {}
+  }, {
+    key: 'fadeout',
+    value: function fadeout() {}
+  }, {
+    key: 'switchVisible',
+    value: function switchVisible() {
+      var _this2 = this;
+
+      if (this.state.visible === false) {
+        this.setState({ visible: true, fading: false });
+      } else {
+        this.setState({ fading: true }, function () {
+          setTimeout(function () {
+            _this2.setState({ visible: false });
+            _this2.setState({ fading: false });
+          }, 3000);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var fadeClass = "";
+      if (this.state.visible === false) {
+        fadeClass = 'animation-wrapper hidden';
+      }
+      if (this.state.visible === true) {
+        fadeClass = 'animation-wrapper';
+      }
+      if (this.state.fading === true) {
+        fadeClass = 'animation-wrapper fade-out';
+      }
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
-          'h2',
-          null,
-          'Animation'
+          'div',
+          { className: fadeClass },
+          _react2.default.createElement(
+            'div',
+            { className: 'animation-title' },
+            'Working...'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'brain-wrapper' },
+            _react2.default.createElement('div', { id: 'circuit-brain' })
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.switchVisible },
+          'switch'
         )
       );
     }
@@ -12208,6 +12261,12 @@ var Animation = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Animation;
+
+// <div className='brain-wrapper'>
+//   <img className='brain' src='http://res.cloudinary.com/couchsmurfing/image/upload/v1491690862/brain-gear_yx26tx.png' />
+// </div>
+
+// <div id='loading-brain'></div>
 
 /***/ }),
 /* 139 */
@@ -12286,11 +12345,20 @@ var Graphics = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'graphics-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'Graphics'
+          'div',
+          { className: 'subtitle-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'subtitle-content' },
+            'Machine Learning Song Classifier'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'graphics-background' },
+          _react2.default.createElement('img', { className: 'background-graphic', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491594643/neural-background_nx9aup.jpg' })
         )
       );
     }
@@ -12353,9 +12421,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Header = function Header() {
   return _react2.default.createElement(
-    'h2',
-    null,
-    'Header'
+    'div',
+    { className: 'header-wrapper' },
+    _react2.default.createElement(
+      'div',
+      { className: 'header' },
+      _react2.default.createElement(
+        'div',
+        { className: 'header-title' },
+        'AudioFiler',
+        _react2.default.createElement(
+          'div',
+          { className: 'links-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'links' },
+            _react2.default.createElement(
+              'a',
+              { href: 'https://github.com/amaciver/AudioFiler' },
+              _react2.default.createElement('img', { className: 'link-img', src: 'http://res.cloudinary.com/couchsmurfing/image/upload/v1491592922/github-logo_dutwf3.png', alt: 'github' })
+            )
+          )
+        )
+      )
+    )
   );
 };
 
@@ -12424,18 +12513,50 @@ var MainPage = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'Main Page, Jerk.'
-        ),
+        { className: 'main-wrapper' },
         _react2.default.createElement(_header2.default, null),
         _react2.default.createElement(_graphics_container2.default, null),
-        _react2.default.createElement(_search_container2.default, null),
-        _react2.default.createElement(_animation2.default, null),
-        _react2.default.createElement(_results2.default, null),
-        _react2.default.createElement(_about2.default, null)
+        _react2.default.createElement(
+          'div',
+          { className: 'ux-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'instructions-wrapper' },
+            _react2.default.createElement(
+              'div',
+              { className: 'instructions-content' },
+              'Select a song and our trained model will analyze it and tell you the genre it appears to be.'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'ux-content' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 left-pane' },
+              _react2.default.createElement(_search_container2.default, null)
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 middle-pane' },
+              _react2.default.createElement(_animation2.default, null)
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-1-3 right-pane' },
+              _react2.default.createElement(_results2.default, null)
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'footer-wrapper' },
+          _react2.default.createElement(
+            'div',
+            { className: 'bottom-tab' },
+            _react2.default.createElement(_about2.default, null)
+          )
+        )
       );
     }
   }]);
@@ -12462,6 +12583,10 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _results_chart = __webpack_require__(368);
+
+var _results_chart2 = _interopRequireDefault(_results_chart);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12484,11 +12609,16 @@ var Results = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'results-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
+          'div',
+          { className: 'results-title' },
           'Results'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'results-chart-wrapper' },
+          _react2.default.createElement(_results_chart2.default, null)
         )
       );
     }
@@ -12548,6 +12678,7 @@ var renderSuggestion = function renderSuggestion(suggestion) {
     'div',
     { className: 'search-list-item' },
     suggestion.track,
+    ' by ',
     suggestion.artist
   );
 };
@@ -12574,47 +12705,37 @@ var Search = function (_React$Component) {
 
   _createClass(Search, [{
     key: 'componentWillMount',
-    value: function componentWillMount() {
-      // if (!this.props.cities.length > 0) {
-      //   this.props.fetchCities();
-      // }
-    }
+    value: function componentWillMount() {}
   }, {
     key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      // if (this.props.cities.length !== nextProps.cities.length) {
-      //   this.setState({suggestions: nextProps.cities})
-      // }
-    }
+    value: function componentWillReceiveProps(nextProps) {}
   }, {
     key: 'onChange',
     value: function onChange(event, _ref) {
       var _this2 = this;
 
-      var newValue = _ref.newValue;
+      var newValue = _ref.newValue,
+          method = _ref.method;
 
-      this.props.fetchTracks(newValue).then(function () {
-        _this2.setState({
-          value: newValue,
-          suggestions: _this2.props.tracks
-        });
-      });
+      switch (method) {
+        case 'type':
+          this.props.fetchTracks(newValue).then(function () {
+            _this2.setState({
+              value: newValue,
+              suggestions: _this2.props.tracks
+            });
+          });
+        default:
+          this.setState({
+            value: newValue
+          });
+      }
     }
   }, {
     key: 'handleSubmit',
-    value: function handleSubmit() {}
-    // const match = (this.props.cities.filter(city =>
-    //   city.name.toLowerCase() === this.state.value.toLowerCase()));
-    //
-    // if (match.length === 1) {
-    //   const id = match[0].id;
-    //   hashHistory.push(`/cities/${id}`);
-    // }
-
-
-    // Autosuggest will call this function every time you need to update suggestions.
-    // You already implemented this logic above, so just use it.
-
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
   }, {
     key: 'onSuggestionsFetchRequested',
     value: function onSuggestionsFetchRequested(_ref2) {
@@ -12624,9 +12745,6 @@ var Search = function (_React$Component) {
         suggestions: this._getSuggestions(value)
       });
     }
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-
   }, {
     key: 'onSuggestionsClearRequested',
     value: function onSuggestionsClearRequested() {
@@ -12640,9 +12758,6 @@ var Search = function (_React$Component) {
       var inputValue = value.trim().toLowerCase();
       var inputLength = inputValue.length;
       return this.state.suggestions;
-      // return inputLength === 0 ? [] : this.props.tracks.filter(city =>
-      //   city.name.toLowerCase().slice(0, inputLength) === inputValue
-      // );
     }
   }, {
     key: 'render',
@@ -12672,8 +12787,8 @@ var Search = function (_React$Component) {
         'div',
         { className: 'search-wrapper' },
         _react2.default.createElement(
-          'h2',
-          null,
+          'div',
+          { className: 'search-title' },
           'Search'
         ),
         _react2.default.createElement(
@@ -12695,10 +12810,14 @@ var Search = function (_React$Component) {
               inputProps: inputProps,
               renderInputComponent: renderInputComponent
             }),
-            _react2.default.createElement('button', {
-              className: 'search-submit',
-              title: 'Search',
-              type: 'submit' })
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'search-submit',
+                title: 'Search',
+                type: 'submit' },
+              _react2.default.createElement('i', { className: 'fa fa-search fa-2x', 'aria-hidden': 'true' })
+            )
           )
         )
       );
@@ -42082,6 +42201,101 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 368 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ResultsChart = function ResultsChart() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'results-chart' },
+    _react2.default.createElement(
+      'div',
+      { className: 'results-chart-header' },
+      'Your song sounds like:'
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'results-chart-list' },
+      _react2.default.createElement(
+        'table',
+        null,
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'th',
+            null,
+            'Genre'
+          ),
+          _react2.default.createElement(
+            'th',
+            null,
+            'Confidence'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Rock'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '80%'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Metal'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '14%'
+          )
+        ),
+        _react2.default.createElement(
+          'tr',
+          null,
+          _react2.default.createElement(
+            'td',
+            null,
+            'Pop'
+          ),
+          _react2.default.createElement(
+            'td',
+            null,
+            '6%'
+          )
+        )
+      )
+    )
+  );
+};
+
+exports.default = ResultsChart;
 
 /***/ })
 /******/ ]);
