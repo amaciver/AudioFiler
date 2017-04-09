@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Search from './search';
 import { fetchTracks } from '../../actions/tracks_actions';
+import { fetchResults } from '../../actions/results_actions';
 
 const mapStateToProps = (state) => {
   let tracks = [];
@@ -23,7 +24,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchTracks: (query_string) => dispatch(fetchTracks(query_string))
+  fetchTracks: (query_string) => dispatch(fetchTracks(query_string)),
+  fetchResults: (url_string) => dispatch(fetchResults(url_string))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

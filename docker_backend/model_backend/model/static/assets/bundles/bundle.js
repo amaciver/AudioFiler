@@ -13351,11 +13351,13 @@ var Search = function (_React$Component) {
 
     _this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      url: ''
     };
     _this.onChange = _this.onChange.bind(_this);
     _this.onSuggestionsFetchRequested = _this.onSuggestionsFetchRequested.bind(_this);
     _this.onSuggestionsClearRequested = _this.onSuggestionsClearRequested.bind(_this);
+    _this.onSuggestionSelected = _this.onSuggestionSelected.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
@@ -13393,6 +13395,9 @@ var Search = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
+      console.log(this.state.url);
+      // console.log(this.props.tracks);
+      this.props.fetchResults(this.state.url);
     }
   }, {
     key: 'onSuggestionsFetchRequested',
@@ -13409,6 +13414,15 @@ var Search = function (_React$Component) {
       this.setState({
         suggestions: []
       });
+    }
+  }, {
+    key: 'onSuggestionSelected',
+    value: function onSuggestionSelected(e, _ref3) {
+      var suggestion = _ref3.suggestion,
+          method = _ref3.method;
+
+      console.log(suggestion.url);
+      this.setState({ url: suggestion.url });
     }
   }, {
     key: '_getSuggestions',
@@ -13460,6 +13474,7 @@ var Search = function (_React$Component) {
               suggestions: suggestions,
               onSuggestionsFetchRequested: this.onSuggestionsFetchRequested,
               onSuggestionsClearRequested: this.onSuggestionsClearRequested,
+              onSuggestionSelected: this.onSuggestionSelected,
               getSuggestionValue: getSuggestionValue,
               renderSuggestion: renderSuggestion,
               highlightFirstSuggestion: true,
@@ -13510,6 +13525,8 @@ var _search2 = _interopRequireDefault(_search);
 
 var _tracks_actions = __webpack_require__(30);
 
+var _results_actions = __webpack_require__(46);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -13533,6 +13550,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchTracks: function fetchTracks(query_string) {
       return dispatch((0, _tracks_actions.fetchTracks)(query_string));
+    },
+    fetchResults: function fetchResults(url_string) {
+      return dispatch((0, _results_actions.fetchResults)(url_string));
     }
   };
 };
@@ -13795,8 +13815,7 @@ Object.defineProperty(exports, "__esModule", {
 var fetchResults = exports.fetchResults = function fetchResults(url_string) {
   return $.ajax({
     method: 'GET',
-    url: '',
-    data: { url_string: url_string }
+    url: '/main/api/' + url_string
   });
 };
 

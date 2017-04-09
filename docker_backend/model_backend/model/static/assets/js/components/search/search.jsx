@@ -25,11 +25,13 @@ class Search extends React.Component {
     // console.log(props.cities);
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      url: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -58,6 +60,9 @@ class Search extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    console.log(this.state.url);
+    // console.log(this.props.tracks);
+    this.props.fetchResults(this.state.url)
   }
 
   onSuggestionsFetchRequested({ value }) {
@@ -70,6 +75,11 @@ class Search extends React.Component {
     this.setState({
       suggestions: []
     });
+  }
+
+  onSuggestionSelected(e, { suggestion, method }) {
+    console.log(suggestion.url);
+    this.setState({url: suggestion.url})
   }
 
   _getSuggestions(value) {
@@ -107,6 +117,7 @@ class Search extends React.Component {
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              onSuggestionSelected={this.onSuggestionSelected}
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
               highlightFirstSuggestion={true}
