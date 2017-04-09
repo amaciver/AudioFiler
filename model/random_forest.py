@@ -203,8 +203,8 @@ import numpy as np
 genres_nothot = np.loadtxt("../data/single_num_genre_tags.txt")
 
 # subset = np.loadtxt("subset_1000.txt")
-na_train = np.array(np.loadtxt(f"../data/batches/batch_1.txt"), dtype="float32")
-na_test = np.array(np.loadtxt(f"../data/batches/batch_24.txt"), dtype="float32")
+na_train = np.array(np.loadtxt("../data/batches/batch_1.txt"), dtype="float32")
+na_test = np.array(np.loadtxt("../data/batches/batch_24.txt"), dtype="float32")
 
 for i in range(2, 24):
     data = np.loadtxt(f"../data/batches/batch_{i}.txt")
