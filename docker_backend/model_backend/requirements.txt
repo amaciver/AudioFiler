@@ -1,0 +1,3 @@
+gunicorn==19.7.1
+django==1.11
+django-webpack-loader==0.4.1
