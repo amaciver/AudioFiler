@@ -13,21 +13,36 @@ b = np.array([[0.028668688727673662, 0.010296874642310268, 2.979289570795993, 0.
 
 c = np.array([[0.13169837562454179, 0.03747907258948448, 3.2093567363765194, 0.20415217142414294, 0.1783023422538795, 1.2981390056554678, 0.00013002260238153973, 0.24316704459561597, -18.057689533187364, 1.0821583049391887, 0.022808529642138784, 0.1549138769242293, 0.5485543540631203, 0.24687343351752963, 0.001938394071525701, -0.029246965650714545, 0.32433651932613095, 0.5493794894195386, -0.1532108536935117, -0.15953240858525616, -0.14292504685871826, 0.001022193915855823, 0.000574248578652918, 0.003744947243702289, 0.0006085355445014114, 0.002063131254826033, 0.003100602255608477, 0.0014455207769336613, 0.003737979544046202, 0.0006869733130853256, 0.0018058484190229462, 0.0019889269642760373, 0.0013000858126485423, 0.0019709657966293925, 0.018371489884997885, 0.0038319853094609868, 0.053279939984258194, 0.012001309617731878, 0.007287461986689352, 0.1875974718744425, 4.252950874934398e-05, 0.04607723005339392, 0.2630779792539925, 0.23210117834659488, 0.17928284477236567, 0.12835441277409773, 0.3027672361440782, 0.12774041196099692, 0.14183339098145453, 0.23304445814417998, 0.2613883636021474, 0.212724386971971, 0.1524114531785372, 0.15298324799066315, 0.11769770369920446, 0.0010044220119722683, 0.00047814477640875284, 0.003668243077559693, 0.0003353471455472499, 0.0022506117030398343, 0.003720407974634264, 0.0010744772528963858, 0.003050953233744261, 0.0005532878059932616, 0.0015633060547211519, 0.001632379520800961, 0.0009701856688470633, 0.0010768320828846707, 199.99999999999997]])
 
-genres = np.loadtxt("genre_tags.txt")
-genres_nothot = np.loadtxt("genre_tags_not_one_hot.txt")
+# genres = np.loadtxt("genre_tags.txt")
+genres_nothot = np.loadtxt("data/single_num_genre_tags.txt")
 
-subset = np.loadtxt("subset_1000.txt")
+# subset = np.loadtxt("subset_1000.txt")
+na_train = np.array(np.loadtxt(f"data/batches/batch_1.txt"), dtype="float32")
+na_test = np.array(np.loadtxt(f"data/batches/batch_24.txt"), dtype="float32")
 
-na_train = np.array(subset[0:800], dtype="float32")
-labels_train = np.array(genres[0:800], dtype="float32")
-labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
+for i in range(2, 24):
+    data = np.loadtxt(f"data/batches/batch_{i}.txt")
+    na_train = np.concatenate((na_train, data))
 
-na_test = np.array(subset[800:], dtype="float32")
-labels_test = np.array(genres[800:], dtype="float32")
-labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
+for i in range(25, 29):
+    data = np.loadtxt(f"data/batches/batch_{i}.txt")
+    na_test = np.concatenate((na_test, data))
+
+labels_train_nothot = np.array(genres_nothot[0:len(na_train)], dtype="int32")
+labels_test_nothot = np.array(genres_nothot[len(na_train):], dtype="int32")
+# na_train = np.array(subset[0:800], dtype="float32")
+# labels_train = np.array(genres[0:800], dtype="float32")
+# labels_train_nothot = np.array(genres_nothot[0:800], dtype="int32")
+
+# na_test = np.array(subset[800:], dtype="float32")
+# labels_test = np.array(genres[800:], dtype="float32")
+# labels_test_nothot = np.array(genres_nothot[800:], dtype="int32")
 
 print (len(na_train))
-print (len(labels_train))
+print (len(labels_train_nothot))
+print (len(na_test))
+print (len(labels_test_nothot))
+
 
 # naive model
 # x = tf.placeholder(tf.float32, [None, 69]) #[num_images, dimensionality of each]
@@ -90,7 +105,7 @@ with tf.Session() as sess:
 
     correct = tf.nn.in_top_k(y, y_nothot, 5)
     eval_correct = tf.reduce_sum(tf.cast(correct, tf.int32))
-    num_examples = 200
+    num_examples = 8251
     true_count = 0  # Counts the number of correct predictions.
     true_count += sess.run(eval_correct, feed_dict={x: na_test, y_nothot: labels_test_nothot})
     precision = float(true_count) / num_examples
@@ -112,4 +127,4 @@ with tf.Session() as sess:
 
 
 
-    save_path = saver.save(sess, './trained_model/model.ckpt')
+    # save_path = saver.save(sess, './trained_model/model.ckpt')

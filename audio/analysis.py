@@ -13,13 +13,14 @@ import numpy as np
 # audioBasicIO.convertDirMP3ToWav('./test_data', 16000, 1, True)
 
 def bpm(filename):
+    print(filename)
     Fs, x = audioBasicIO.readAudioFile(filename)
     x_ = audioBasicIO.stereo2mono(x)
     F = aF.stFeatureExtraction(x_, Fs, 0.050 * Fs, 0.050 * Fs)
     BPM, ratio = aF.beatExtraction(F, 0.050, False)
     return BPM
 
-vectors, filenames = aF.dirWavFeatureExtraction('./mp3s', 60, 30, 1, 1)
+vectors, filenames = aF.dirWavFeatureExtraction('/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_28', 60, 30, 1, 1)
 bpms = map(bpm, filenames)
 
 # oh I'll have to wrap filenames and vectors in an array if there is only one file
@@ -55,6 +56,6 @@ for entry in results:
 
 
 ## save np object to txt
-np.savetxt("subset_1000.txt", arr2)
+np.savetxt("/Volumes/Seagate Expansion Drive/AudioFiler/batches/batch_28.txt", arr2)
 # load = np.loadtxt("test.txt")
 # print (np.array(load)[0])

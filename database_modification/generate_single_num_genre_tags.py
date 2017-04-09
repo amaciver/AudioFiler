@@ -36,10 +36,8 @@ GENRES = {
 c.execute('''SELECT genre, id from tracks''')
 master_array = []
 for row in c:
-    print(row)
-    one_hot = [0.] * 26
     genre = row[0]
     index = GENRES[genre]
-    one_hot[index] = 1.
-    master_array.append(one_hot)
-np.savetxt("/Volumes/Seagate Expansion Drive/AudioFiler/one_hot_genre_tags.txt", master_array)
+    print(row, index)
+    master_array.append(index)
+np.savetxt("/Volumes/Seagate Expansion Drive/AudioFiler/single_num_genre_tags.txt", master_array)
