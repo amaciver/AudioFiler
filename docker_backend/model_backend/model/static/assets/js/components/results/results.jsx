@@ -7,11 +7,15 @@ class Results extends React.Component {
   }
 
   render() {
+    let chart;
+    if (this.props.results.classification) {
+      chart = <ResultsChart results={this.props.results} currentTrack={this.props.currentTrack}/>
+    }
     return(
       <div className='results-wrapper'>
         <div className='results-title'>Results</div>
         <div className='results-chart-wrapper'>
-          <ResultsChart />
+          {chart}
         </div>
 
       </div>

@@ -1,34 +1,45 @@
 import React from 'react';
+import Row from './row';
 
-const ResultsChart = () => {
-  return (
-    <div className='results-chart'>
-      <div className='results-chart-header'>
-        Your song sounds like:
-      </div>
-      <div className='results-chart-list'>
-        <table>
-          <tr>
-            <th>Genre</th>
-            <th>Confidence</th>
-          </tr>
-          <tr>
-            <td>Rock</td>
-            <td>80%</td>
-          </tr>
-          <tr>
-            <td>Metal</td>
-            <td>14%</td>
-          </tr>
-          <tr>
-            <td>Pop</td>
-            <td>6%</td>
-          </tr>
-        </table>
 
+class ResultsChart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let entries = [];
+    let results = this.props.results.classification;
+    if (results) {
+      entries = Object.keys(results).map( (key) => {
+        return (
+          <Row key={key} genre={results[key]} />
+        );
+      });
+    }
+
+    let track = this.props.currentTrack;
+
+    return (
+      <div className='results-chart'>
+        <div className='results-chart-header'>
+          {track.track} by {track.artist} sounds like:
+        </div>
+        <div className='results-chart-list'>
+          <table>
+            <tbody>
+              <tr>
+                <th>Genre</th>
+                <th>Confidence</th>
+              </tr>
+              {entries}
+            </tbody>
+          </table>
+
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default ResultsChart;

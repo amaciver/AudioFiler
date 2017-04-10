@@ -25,11 +25,14 @@ class Search extends React.Component {
     // console.log(props.cities);
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      url: '',
+      track: null
     };
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
     this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this);
+    this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -42,10 +45,11 @@ class Search extends React.Component {
   onChange(event, { newValue, method }) {
     switch (method) {
       case 'type':
-        this.props.fetchTracks(newValue).then( () => {
-          this.setState({
-            value: newValue,
-            suggestions: this.props.tracks
+        this.setState({value: newValue}, () => {
+          this.props.fetchTracks(newValue).then( () => {
+            this.setState({
+              suggestions: this.props.tracks
+            })
           })
         })
       default:
@@ -57,6 +61,11 @@ class Search extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    // console.log(this.state.url);
+    this.props.receiveTrack(this.state.track);
+    this.props.clearResults({});
+    // console.log(this.props.tracks);
+    this.props.fetchResults(this.state.url);
   }
 
   onSuggestionsFetchRequested({ value }) {
@@ -66,9 +75,15 @@ class Search extends React.Component {
   }
 
   onSuggestionsClearRequested() {
+    this.props.clearResults({});
     this.setState({
       suggestions: []
     });
+  }
+
+  onSuggestionSelected(e, { suggestion, method }) {
+    // console.log(suggestion);
+    this.setState({url: suggestion.url, track: suggestion})
   }
 
   _getSuggestions(value) {
@@ -106,6 +121,7 @@ class Search extends React.Component {
               suggestions={suggestions}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              onSuggestionSelected={this.onSuggestionSelected}
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
               highlightFirstSuggestion={true}
