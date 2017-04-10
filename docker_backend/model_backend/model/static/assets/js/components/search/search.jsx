@@ -75,6 +75,7 @@ class Search extends React.Component {
   }
 
   onSuggestionsClearRequested() {
+    this.props.clearResults({});
     this.setState({
       suggestions: []
     });

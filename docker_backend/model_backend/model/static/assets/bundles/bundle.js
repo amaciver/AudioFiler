@@ -13183,7 +13183,6 @@ var Results = function (_React$Component) {
       if (this.props.results.classification) {
         chart = _react2.default.createElement(_results_chart2.default, { results: this.props.results, currentTrack: this.props.currentTrack });
       }
-      console.log(this.props.currentTrack);
       return _react2.default.createElement(
         'div',
         { className: 'results-wrapper' },
@@ -13432,6 +13431,7 @@ var Search = function (_React$Component) {
   }, {
     key: 'onSuggestionsClearRequested',
     value: function onSuggestionsClearRequested() {
+      this.props.clearResults({});
       this.setState({
         suggestions: []
       });
