@@ -25,7 +25,7 @@ SECRET_KEY = 'q6afvpnsrx8e75j59prku_p17!m%qfgd!r)mbwhz*&7ck8n^a#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ayyjohn.pythonanywhere.com']
 
 
 # Application definition
@@ -119,10 +119,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/model/static/'
-
+STATIC_URL = '/home/ayyjohn/AudioFiler/docker_backend/model_backend/model/static/'
+STATIC_ROOT = '/home/ayyjohn/AudioFiler/docker_backend/model_backend/model/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(STATIC_ROOT, 'assets'),
 )
 
 WEBPACK_LOADER = {
