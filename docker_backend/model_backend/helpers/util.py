@@ -6,6 +6,8 @@ import numpy as np
 curpath = os.path.abspath(os.curdir)
 tf_path = os.path.join(curpath, 'helpers/tensorflow')
 model_path = os.path.join(curpath, 'helpers/completed_model')
+forest_path = os.path.join(curpath, 'helpers/trained_forest')
+
 sys.path.append(tf_path)
 sys.path.append(model_path)
 
@@ -23,10 +25,10 @@ from sklearn.externals import joblib
 import pandas as pd
 
 def run_forests(vector):
-    single_song_features = np.array(features_array, dtype='int32')
+    single_song_features = np.array(vector, dtype='int32')
     classifications = []
     for i in range(0, 20):
-        clf = joblib.load("./trained_forest/model_%(i)s.pk1" % locals())
+        clf = joblib.load(os.path.join(forest_path, "model_%(i)s.pk1" % locals()))
         preds = clf.predict(single_song_features)
         classifications.append(preds[0])
 

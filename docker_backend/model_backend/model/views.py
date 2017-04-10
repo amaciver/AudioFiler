@@ -39,7 +39,7 @@ GENRES = {
 
 def index(request):
     return render(request, 'index.html')
-#
+
 # def show(request, preview_url):
 #     url = f"http://localhost:8001/analysis/{preview_url}"
 #     response = requests.get(url)
@@ -51,15 +51,16 @@ def index(request):
 
 # version that uses random forest
 def show(request, preview_url):
-    url = f"http://localhost:8001/analysis/{preview_url}"
+    url = ("http://localhost:8001/analysis/%(preview_url)s" % locals())
     response = requests.get(url)
-    classifications = util.run_forests([response.json()['features']]).tolist()
-
+    classifications = util.run_forests([response.json()['features']])
     guesses = Counter(classifications).items()
-    sorted_guesses = sorted(guesses, key=lambda x: x[1]).reverse()
+    sorted_guesses = sorted(guesses, key=lambda x: x[1])
+    sorted_guesses.reverse()
 
     top_guesses = []
-    for i in range(0,4):
+    num_genres = min(len(sorted_guesses), 4)
+    for i in range(0, num_genres):
         genre = GENRES[sorted_guesses[i][0]]
         confidence = sorted_guesses[i][1] / 20
         top_guesses.append([genre, confidence])
