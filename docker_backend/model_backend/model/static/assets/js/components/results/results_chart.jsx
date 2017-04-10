@@ -17,11 +17,13 @@ class ResultsChart extends React.Component {
         );
       });
     }
-    
+
+    let track = this.props.currentTrack;
+
     return (
       <div className='results-chart'>
         <div className='results-chart-header'>
-          Your song sounds like:
+          {track.track} by {track.artist} sounds like:
         </div>
         <div className='results-chart-list'>
           <table>

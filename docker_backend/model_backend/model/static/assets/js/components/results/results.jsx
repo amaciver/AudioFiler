@@ -9,7 +9,7 @@ class Results extends React.Component {
   render() {
     let chart;
     if (this.props.results.classification) {
-      chart = <ResultsChart results={this.props.results}/>
+      chart = <ResultsChart results={this.props.results} currentTrack={this.props.currentTrack}/>
     }
     console.log(this.props.currentTrack);
     return(

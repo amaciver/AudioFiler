@@ -13181,7 +13181,7 @@ var Results = function (_React$Component) {
     value: function render() {
       var chart = void 0;
       if (this.props.results.classification) {
-        chart = _react2.default.createElement(_results_chart2.default, { results: this.props.results });
+        chart = _react2.default.createElement(_results_chart2.default, { results: this.props.results, currentTrack: this.props.currentTrack });
       }
       console.log(this.props.currentTrack);
       return _react2.default.createElement(
@@ -13255,13 +13255,18 @@ var ResultsChart = function (_React$Component) {
         });
       }
 
+      var track = this.props.currentTrack;
+
       return _react2.default.createElement(
         'div',
         { className: 'results-chart' },
         _react2.default.createElement(
           'div',
           { className: 'results-chart-header' },
-          'Your song sounds like:'
+          track.track,
+          ' by ',
+          track.artist,
+          ' sounds like:'
         ),
         _react2.default.createElement(
           'div',
@@ -13411,6 +13416,7 @@ var Search = function (_React$Component) {
       e.preventDefault();
       // console.log(this.state.url);
       this.props.receiveTrack(this.state.track);
+      this.props.clearResults({});
       // console.log(this.props.tracks);
       this.props.fetchResults(this.state.url);
     }
@@ -13436,7 +13442,7 @@ var Search = function (_React$Component) {
       var suggestion = _ref3.suggestion,
           method = _ref3.method;
 
-      console.log(suggestion);
+      // console.log(suggestion);
       this.setState({ url: suggestion.url, track: suggestion });
     }
   }, {
@@ -13571,6 +13577,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     receiveTrack: function receiveTrack(track) {
       return dispatch((0, _tracks_actions.receiveTrack)(track));
+    },
+    clearResults: function clearResults(results) {
+      return dispatch((0, _results_actions.clearResults)(results));
     }
   };
 };

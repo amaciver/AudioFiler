@@ -62,9 +62,10 @@ class Search extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     // console.log(this.state.url);
-    this.props.receiveTrack(this.state.track)
+    this.props.receiveTrack(this.state.track);
+    this.props.clearResults({});
     // console.log(this.props.tracks);
-    this.props.fetchResults(this.state.url)
+    this.props.fetchResults(this.state.url);
   }
 
   onSuggestionsFetchRequested({ value }) {
@@ -80,7 +81,7 @@ class Search extends React.Component {
   }
 
   onSuggestionSelected(e, { suggestion, method }) {
-    console.log(suggestion);
+    // console.log(suggestion);
     this.setState({url: suggestion.url, track: suggestion})
   }
 
