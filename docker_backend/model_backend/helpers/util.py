@@ -22,7 +22,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 import pandas as pd
 
-def run_forests(vectors):
+def run_forests(vector):
     single_song_features = np.array(features_array, dtype='int32')
     classifications = []
     for i in range(0, 20):
