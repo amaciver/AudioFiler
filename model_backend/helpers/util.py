@@ -28,7 +28,7 @@ def run_forests(vector):
     # single_song_features = np.array(vector, dtype='int32')
     classifications = []
     for i in range(0, 20):
-        clf = joblib.load(os.path.join("/home/ayyjohn/AudioFiler/docker_backend/model_backend/helpers/trained_forest", "model_%(i)s.pk1" % locals()))
+        clf = joblib.load(os.path.join("/home/ayyjohn/AudioFiler/model_backend/helpers/trained_forest", "model_%(i)s.pk1" % locals()))
         preds = clf.predict(vector)
         classifications.append(preds[0])
 
