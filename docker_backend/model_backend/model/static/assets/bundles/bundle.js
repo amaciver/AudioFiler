@@ -13179,6 +13179,11 @@ var Results = function (_React$Component) {
   _createClass(Results, [{
     key: 'render',
     value: function render() {
+      var chart = void 0;
+      if (this.props.results.classification) {
+        chart = _react2.default.createElement(_results_chart2.default, { results: this.props.results });
+      }
+      console.log(this.props.currentTrack);
       return _react2.default.createElement(
         'div',
         { className: 'results-wrapper' },
@@ -13190,7 +13195,7 @@ var Results = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'results-chart-wrapper' },
-          _react2.default.createElement(_results_chart2.default, { results: this.props.results })
+          chart
         )
       );
     }
@@ -13249,6 +13254,7 @@ var ResultsChart = function (_React$Component) {
           return _react2.default.createElement(_row2.default, { key: key, genre: results[key] });
         });
       }
+
       return _react2.default.createElement(
         'div',
         { className: 'results-chart' },
@@ -13359,7 +13365,8 @@ var Search = function (_React$Component) {
     _this.state = {
       value: '',
       suggestions: [],
-      url: ''
+      url: '',
+      track: null
     };
     _this.onChange = _this.onChange.bind(_this);
     _this.onSuggestionsFetchRequested = _this.onSuggestionsFetchRequested.bind(_this);
@@ -13402,7 +13409,8 @@ var Search = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      console.log(this.state.url);
+      // console.log(this.state.url);
+      this.props.receiveTrack(this.state.track);
       // console.log(this.props.tracks);
       this.props.fetchResults(this.state.url);
     }
@@ -13428,8 +13436,8 @@ var Search = function (_React$Component) {
       var suggestion = _ref3.suggestion,
           method = _ref3.method;
 
-      console.log(suggestion.url);
-      this.setState({ url: suggestion.url });
+      console.log(suggestion);
+      this.setState({ url: suggestion.url, track: suggestion });
     }
   }, {
     key: '_getSuggestions',
@@ -13560,6 +13568,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchResults: function fetchResults(url_string) {
       return dispatch((0, _results_actions.fetchResults)(url_string));
+    },
+    receiveTrack: function receiveTrack(track) {
+      return dispatch((0, _tracks_actions.receiveTrack)(track));
     }
   };
 };
@@ -13683,7 +13694,7 @@ var ResultsReducer = function ResultsReducer() {
     case _results_actions.RECEIVE_RESULTS:
       return action.results;
     case _results_actions.CLEAR_RESULTS:
-      return action.track;
+      return action.results;
     default:
       return state;
   }
@@ -42647,7 +42658,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    results: state.results
+    results: state.results,
+    currentTrack: state.currentTrack
   };
 };
 

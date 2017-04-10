@@ -17,6 +17,7 @@ class ResultsChart extends React.Component {
         );
       });
     }
+    
     return (
       <div className='results-chart'>
         <div className='results-chart-header'>
