@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Row = ({genre, confidence='10%'}) => (
+const Row = ({genre, confidence}) => (
   <tr>
     <td>{genre}</td>
-    <td>{confidence}</td>
+    <td>{confidence*100}%</td>
   </tr>
 );
 
