@@ -11,3 +11,11 @@ sklearn==0.0
 subprocess32==3.2.7
 matplotlib==2.0.0
 gunicorn==19.7.1
+eyed3
+pydub
+six
+pyparsing
+cycler
+packaging
+hmmlearn
+functools32
