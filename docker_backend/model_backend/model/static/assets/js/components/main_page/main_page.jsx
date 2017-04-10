@@ -3,7 +3,7 @@ import Header from './header';
 import GraphicsContainer from '../graphics/graphics_container';
 import SearchContainer from '../search/search_container';
 import Animation from '../animation/animation';
-import ResultsContainer from '../results/results';
+import ResultsContainer from '../results/results_container';
 import About from '../about/about';
 
 class MainPage extends React.Component {
@@ -31,7 +31,7 @@ class MainPage extends React.Component {
               <SearchContainer />
             </div>
             <div className='col-1-3 middle-pane'>
-              <Animation />
+              <Animation loading={this.props.loading}/>
             </div>
             <div className='col-1-3 right-pane'>
               <ResultsContainer />

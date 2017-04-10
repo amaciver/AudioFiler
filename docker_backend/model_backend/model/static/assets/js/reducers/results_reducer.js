@@ -9,7 +9,7 @@ const ResultsReducer = (state = {}, action) => {
     case RECEIVE_RESULTS:
       return action.results;
     case CLEAR_RESULTS:
-      return action.track;
+      return action.results;
     default:
       return state;
   }
