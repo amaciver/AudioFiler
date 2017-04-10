@@ -15,7 +15,7 @@
 
 .instructions-wrapper {
   position: absolute;
-  z-index: 3;
+  z-index: 0;
   top: 0px;
   display: flex;
   justify-content: center;
@@ -70,13 +70,13 @@
   /*position: absolute;
   bottom: 0px;
   left: 48vw;*/
-  width: 100px;
+  width: 200px;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
   border-top: 1px solid gray;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  height: 39px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
