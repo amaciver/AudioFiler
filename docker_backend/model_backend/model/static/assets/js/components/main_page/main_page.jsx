@@ -31,7 +31,7 @@ class MainPage extends React.Component {
               <SearchContainer />
             </div>
             <div className='col-1-3 middle-pane'>
-              <Animation />
+              <Animation loading={this.props.loading}/>
             </div>
             <div className='col-1-3 right-pane'>
               <ResultsContainer />

@@ -8416,7 +8416,9 @@ var _main_page2 = _interopRequireDefault(_main_page);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {};
+  return {
+    loading: state.loading
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -12759,6 +12761,17 @@ var Animation = function (_React$Component) {
   }
 
   _createClass(Animation, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.loading === true) {
+        console.log('loading');
+        this.switchVisible();
+      } else if (nextProps.loading === false && this.state.visible === true) {
+        console.log('done loading');
+        this.switchVisible();
+      }
+    }
+  }, {
     key: 'fadein',
     value: function fadein() {}
   }, {
@@ -12783,6 +12796,7 @@ var Animation = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+
       var fadeClass = "";
       if (this.state.visible === false) {
         fadeClass = 'animation-wrapper hidden';
@@ -12809,11 +12823,6 @@ var Animation = function (_React$Component) {
             { className: 'brain-wrapper' },
             _react2.default.createElement('div', { id: 'circuit-brain' })
           )
-        ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.switchVisible },
-          'switch'
         )
       );
     }
@@ -12824,6 +12833,7 @@ var Animation = function (_React$Component) {
 
 exports.default = Animation;
 
+// <button onClick={this.switchVisible}>switch</button>
 // <div className='brain-wrapper'>
 //   <img className='brain' src='http://res.cloudinary.com/couchsmurfing/image/upload/v1491690862/brain-gear_yx26tx.png' />
 // </div>
@@ -13101,7 +13111,7 @@ var MainPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'col-1-3 middle-pane' },
-              _react2.default.createElement(_animation2.default, null)
+              _react2.default.createElement(_animation2.default, { loading: this.props.loading })
             ),
             _react2.default.createElement(
               'div',
@@ -13234,13 +13244,11 @@ var ResultsChart = function (_React$Component) {
     value: function render() {
       var entries = [];
       var results = this.props.results.classification;
-      console.log(this.props.results.classification);
       if (results) {
         entries = Object.keys(results).map(function (key) {
           return _react2.default.createElement(_row2.default, { key: key, genre: results[key] });
         });
       }
-      console.log(entries);
       return _react2.default.createElement(
         'div',
         { className: 'results-chart' },
@@ -13628,9 +13636,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _results_actions = __webpack_require__(46);
 
-var initialState = {
-  false: false
-};
+var initialState = false;
 
 exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -13641,7 +13647,7 @@ exports.default = function () {
     case _results_actions.RECEIVE_RESULTS:
       return initialState;
     case _results_actions.START_LOADING_RESULTS:
-      return Object.assign({}, state, { true: true });
+      return true;
     default:
       return state;
   }

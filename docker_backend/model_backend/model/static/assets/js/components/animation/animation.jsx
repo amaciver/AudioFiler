@@ -10,6 +10,16 @@ class Animation extends React.Component {
     this.switchVisible = this.switchVisible.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loading === true) {
+      console.log('loading');
+      this.switchVisible();
+    } else if (nextProps.loading === false && this.state.visible === true) {
+      console.log('done loading');
+      this.switchVisible();
+    }
+  }
+
   fadein () {
 
   }
@@ -32,6 +42,7 @@ class Animation extends React.Component {
   }
 
   render() {
+
     let fadeClass = ""
     if (this.state.visible === false) {
       fadeClass = 'animation-wrapper hidden';
@@ -51,7 +62,6 @@ class Animation extends React.Component {
             <div id='circuit-brain'></div>
           </div>
         </div>
-        <button onClick={this.switchVisible}>switch</button>
       </div>
     )
   }
@@ -59,6 +69,7 @@ class Animation extends React.Component {
 
 export default Animation;
 
+// <button onClick={this.switchVisible}>switch</button>
 // <div className='brain-wrapper'>
 //   <img className='brain' src='http://res.cloudinary.com/couchsmurfing/image/upload/v1491690862/brain-gear_yx26tx.png' />
 // </div>
