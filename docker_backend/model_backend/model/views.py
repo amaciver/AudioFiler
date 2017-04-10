@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import requests
 import pdb
+from collections import Counter
+
 
 from helpers import util
 
@@ -38,11 +40,29 @@ GENRES = {
 def index(request):
     return render(request, 'index.html')
 
+# def show(request, preview_url):
+#     url = f"http://localhost:8001/analysis/{preview_url}"
+#     response = requests.get(url)
+#     classification = util.run_model([response.json()['features']]).tolist()
+#     # pdb.set_trace()
+#     genre_guesses = list(map(lambda x: GENRES[x], classification))
+#     return JsonResponse({"classification": genre_guesses})
+#     # return(classify(response))
+
+# version that uses random forest
 def show(request, preview_url):
-    url = f"http://localhost:8001/analysis/{preview_url}"
+    url = ("http://localhost:8001/analysis/%(preview_url)s" % locals())
     response = requests.get(url)
-    classification = util.run_model([response.json()['features']]).tolist()
-    # pdb.set_trace()
-    genre_guesses = list(map(lambda x: GENRES[x], classification))
-    return JsonResponse({"classification": genre_guesses})
-    # return(classify(response))
+    classifications = util.run_forests([response.json()['features']])
+    guesses = Counter(classifications).items()
+    sorted_guesses = sorted(guesses, key=lambda x: x[1])
+    sorted_guesses.reverse()
+
+    top_guesses = []
+    num_genres = min(len(sorted_guesses), 4)
+    for i in range(0, num_genres):
+        genre = GENRES[sorted_guesses[i][0]]
+        confidence = sorted_guesses[i][1] / 20
+        top_guesses.append([genre, confidence])
+
+    return JsonResponse({"classification": top_guesses})
