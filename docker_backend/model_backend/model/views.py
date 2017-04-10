@@ -64,7 +64,7 @@ def show(request, preview_url):
     sorted_guesses.reverse()
 
     top_guesses = []
-    num_genres = min(len(sorted_guesses), 4)
+    num_genres = min(len(sorted_guesses), 5)
     for i in range(0, num_genres):
         genre = GENRES[sorted_guesses[i][0]]
         confidence = sorted_guesses[i][1] / 20

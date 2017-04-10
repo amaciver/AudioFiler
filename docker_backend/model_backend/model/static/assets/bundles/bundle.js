@@ -13250,7 +13250,7 @@ var ResultsChart = function (_React$Component) {
       var results = this.props.results.classification;
       if (results) {
         entries = Object.keys(results).map(function (key) {
-          return _react2.default.createElement(_row2.default, { key: key, genre: results[key] });
+          return _react2.default.createElement(_row2.default, { key: key, genre: results[key][0], confidence: results[key][1] });
         });
       }
 
@@ -13358,8 +13358,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Row = function Row(_ref) {
   var genre = _ref.genre,
-      _ref$confidence = _ref.confidence,
-      confidence = _ref$confidence === undefined ? '10%' : _ref$confidence;
+      confidence = _ref.confidence;
   return _react2.default.createElement(
     'tr',
     null,
@@ -13371,7 +13370,8 @@ var Row = function Row(_ref) {
     _react2.default.createElement(
       'td',
       null,
-      confidence
+      confidence * 100,
+      '%'
     )
   );
 };

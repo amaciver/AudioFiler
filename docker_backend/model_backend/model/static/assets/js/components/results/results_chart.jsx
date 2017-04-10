@@ -13,7 +13,7 @@ class ResultsChart extends React.Component {
     if (results) {
       entries = Object.keys(results).map( (key) => {
         return (
-          <Row key={key} genre={results[key]} />
+          <Row key={key} genre={results[key][0]} confidence={results[key][1]} />
         );
       });
     }
