@@ -30,7 +30,7 @@ SECRET_KEY = '&_ve&&-=n$v4ujxk$nsmq)4^k$4pqb%=9ff5)lkpy^x5nc)#mw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u"adomhartell.pythonanywhere.com"]
 
 
 # Application definition
