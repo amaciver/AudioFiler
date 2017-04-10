@@ -119,8 +119,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/home/ayyjohn/AudioFiler/docker_backend/model_backend/model/static/'
-STATIC_ROOT = '/home/ayyjohn/AudioFiler/docker_backend/model_backend/model/static/'
+STATIC_URL = '/home/ayyjohn/AudioFiler/model_backend/model/static/'
+STATIC_ROOT = '/home/ayyjohn/AudioFiler/model_backend/model/static/'
 STATICFILES_DIRS = (
     os.path.join(STATIC_ROOT, 'assets'),
 )
