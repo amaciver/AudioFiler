@@ -53,7 +53,7 @@ def index(request):
 def show(request, preview_url):
 
 
-    url = ("http://localhost:8001/analysis/%(preview_url)s" % locals())
+    url = ("http://adomhartell.pythonanywhere.com/analysis/%(preview_url)s" % locals())
     response = requests.get(url)
 
     features = np.array([response.json()['features']])
