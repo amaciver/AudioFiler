@@ -25,11 +25,11 @@ from sklearn.externals import joblib
 import pandas as pd
 
 def run_forests(vector):
-    single_song_features = np.array(vector, dtype='int32')
+    # single_song_features = np.array(vector, dtype='int32')
     classifications = []
     for i in range(0, 20):
         clf = joblib.load(os.path.join(forest_path, "model_%(i)s.pk1" % locals()))
-        preds = clf.predict(single_song_features)
+        preds = clf.predict(vector)
         classifications.append(preds[0])
 
     return(classifications)

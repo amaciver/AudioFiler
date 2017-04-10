@@ -2,7 +2,7 @@ from django.shortcuts import render
 import requests
 import pdb
 from collections import Counter
-
+import numpy as np
 
 from helpers import util
 
@@ -51,9 +51,14 @@ def index(request):
 
 # version that uses random forest
 def show(request, preview_url):
+
+
     url = ("http://localhost:8001/analysis/%(preview_url)s" % locals())
     response = requests.get(url)
-    classifications = util.run_forests([response.json()['features']])
+
+    features = np.array([response.json()['features']])
+
+    classifications = util.run_forests(features)
     guesses = Counter(classifications).items()
     sorted_guesses = sorted(guesses, key=lambda x: x[1])
     sorted_guesses.reverse()
@@ -64,5 +69,4 @@ def show(request, preview_url):
         genre = GENRES[sorted_guesses[i][0]]
         confidence = sorted_guesses[i][1] / 20
         top_guesses.append([genre, confidence])
-
     return JsonResponse({"classification": top_guesses})
