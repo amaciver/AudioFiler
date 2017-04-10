@@ -3,7 +3,7 @@ import Header from './header';
 import GraphicsContainer from '../graphics/graphics_container';
 import SearchContainer from '../search/search_container';
 import Animation from '../animation/animation';
-import ResultsContainer from '../results/results';
+import ResultsContainer from '../results/results_container';
 import About from '../about/about';
 
 class MainPage extends React.Component {

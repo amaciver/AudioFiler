@@ -11,7 +11,7 @@ class Results extends React.Component {
       <div className='results-wrapper'>
         <div className='results-title'>Results</div>
         <div className='results-chart-wrapper'>
-          <ResultsChart />
+          <ResultsChart results={this.props.results}/>
         </div>
 
       </div>

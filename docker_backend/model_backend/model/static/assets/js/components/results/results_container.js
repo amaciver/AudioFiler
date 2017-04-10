@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Results from './results';
 
-const mapStateToProps = (state) => ({
-
-});
+const mapStateToProps = (state) => {
+  return ({
+    results: state.results
+  });
+}
 
 const mapDispatchToProps = dispatch => ({
 

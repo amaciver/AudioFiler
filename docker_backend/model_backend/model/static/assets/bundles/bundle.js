@@ -13045,9 +13045,9 @@ var _animation = __webpack_require__(140);
 
 var _animation2 = _interopRequireDefault(_animation);
 
-var _results = __webpack_require__(146);
+var _results_container = __webpack_require__(373);
 
-var _results2 = _interopRequireDefault(_results);
+var _results_container2 = _interopRequireDefault(_results_container);
 
 var _about = __webpack_require__(139);
 
@@ -13106,7 +13106,7 @@ var MainPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'col-1-3 right-pane' },
-              _react2.default.createElement(_results2.default, null)
+              _react2.default.createElement(_results_container2.default, null)
             )
           )
         ),
@@ -13180,7 +13180,7 @@ var Results = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'results-chart-wrapper' },
-          _react2.default.createElement(_results_chart2.default, null)
+          _react2.default.createElement(_results_chart2.default, { results: this.props.results })
         )
       );
     }
@@ -13202,87 +13202,86 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _row = __webpack_require__(374);
+
+var _row2 = _interopRequireDefault(_row);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ResultsChart = function ResultsChart() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'results-chart' },
-    _react2.default.createElement(
-      'div',
-      { className: 'results-chart-header' },
-      'Your song sounds like:'
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'results-chart-list' },
-      _react2.default.createElement(
-        'table',
-        null,
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ResultsChart = function (_React$Component) {
+  _inherits(ResultsChart, _React$Component);
+
+  function ResultsChart(props) {
+    _classCallCheck(this, ResultsChart);
+
+    return _possibleConstructorReturn(this, (ResultsChart.__proto__ || Object.getPrototypeOf(ResultsChart)).call(this, props));
+  }
+
+  _createClass(ResultsChart, [{
+    key: 'render',
+    value: function render() {
+      var entries = [];
+      var results = this.props.results.classification;
+      console.log(this.props.results.classification);
+      if (results) {
+        entries = Object.keys(results).map(function (key) {
+          return _react2.default.createElement(_row2.default, { key: key, genre: results[key] });
+        });
+      }
+      console.log(entries);
+      return _react2.default.createElement(
+        'div',
+        { className: 'results-chart' },
         _react2.default.createElement(
-          'tr',
-          null,
-          _react2.default.createElement(
-            'th',
-            null,
-            'Genre'
-          ),
-          _react2.default.createElement(
-            'th',
-            null,
-            'Confidence'
-          )
+          'div',
+          { className: 'results-chart-header' },
+          'Your song sounds like:'
         ),
         _react2.default.createElement(
-          'tr',
-          null,
+          'div',
+          { className: 'results-chart-list' },
           _react2.default.createElement(
-            'td',
+            'table',
             null,
-            'Rock'
-          ),
-          _react2.default.createElement(
-            'td',
-            null,
-            '80%'
-          )
-        ),
-        _react2.default.createElement(
-          'tr',
-          null,
-          _react2.default.createElement(
-            'td',
-            null,
-            'Metal'
-          ),
-          _react2.default.createElement(
-            'td',
-            null,
-            '14%'
-          )
-        ),
-        _react2.default.createElement(
-          'tr',
-          null,
-          _react2.default.createElement(
-            'td',
-            null,
-            'Pop'
-          ),
-          _react2.default.createElement(
-            'td',
-            null,
-            '6%'
+            _react2.default.createElement(
+              'tbody',
+              null,
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Genre'
+                ),
+                _react2.default.createElement(
+                  'th',
+                  null,
+                  'Confidence'
+                )
+              ),
+              entries
+            )
           )
         )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return ResultsChart;
+}(_react2.default.Component);
 
 exports.default = ResultsChart;
 
@@ -42616,6 +42615,80 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 373 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(43);
+
+var _results = __webpack_require__(146);
+
+var _results2 = _interopRequireDefault(_results);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    results: state.results
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_results2.default);
+
+/***/ }),
+/* 374 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Row = function Row(_ref) {
+  var genre = _ref.genre,
+      _ref$confidence = _ref.confidence,
+      confidence = _ref$confidence === undefined ? '10%' : _ref$confidence;
+  return _react2.default.createElement(
+    'tr',
+    null,
+    _react2.default.createElement(
+      'td',
+      null,
+      genre
+    ),
+    _react2.default.createElement(
+      'td',
+      null,
+      confidence
+    )
+  );
+};
+
+exports.default = Row;
 
 /***/ })
 /******/ ]);
