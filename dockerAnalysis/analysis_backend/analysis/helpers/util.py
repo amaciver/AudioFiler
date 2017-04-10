@@ -14,7 +14,8 @@ from pyAudioAnalysis import audioBasicIO as audioBasicIO
 
 
 def downloadPreview(preview_url):
-    r = requests.get(preview_url)
+    request_string = "https://" + preview_url[7:]
+    r = requests.get(request_string)
 
 
     with open(os.path.join(mp3_directory), 'wb') as mp3_file:
