@@ -25,7 +25,7 @@ SECRET_KEY = 'q6afvpnsrx8e75j59prku_p17!m%qfgd!r)mbwhz*&7ck8n^a#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ayyjohn.pythonanywhere.com']
+ALLOWED_HOSTS = ['ayyjohn.pythonanywhere.com', 'localhost']
 
 
 # Application definition
@@ -119,15 +119,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/home/ayyjohn/AudioFiler/model_backend/model/static/'
-STATIC_ROOT = '/home/ayyjohn/AudioFiler/model_backend/model/static/'
-STATICFILES_DIRS = (
-    os.path.join(STATIC_ROOT, 'assets'),
-)
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
+# STATICFILES_DIRS = (
+#     os.path.join(STATIC_ROOT, 'assets'),
+# )
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'assets/bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-    }
-}
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'assets/bundles/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+#     }
+# }
