@@ -3783,7 +3783,6 @@ var clearTrack = exports.clearTrack = function clearTrack(track) {
 var fetchTracks = exports.fetchTracks = function fetchTracks(query_string, token) {
   return function (dispatch) {
     // dispatch(startLoadingTracks());
-    console.log(token);
     return APIUtil.fetchTracks(query_string, token).then(function (tracks) {
       return dispatch(receiveTracks(tracks));
     });
@@ -14418,9 +14417,7 @@ var Search = function (_React$Component) {
       switch (method) {
         case 'type':
           this.setState({ value: newValue }, function () {
-            // console.log(this.props.token.token);
             var token = _this2.props.token.token;
-            console.log(token);
             _this2.props.fetchTracks(newValue, token).then(function () {
               _this2.setState({
                 suggestions: _this2.props.tracks
@@ -14952,7 +14949,7 @@ exports.fetchTracks = undefined;
 __webpack_require__(189);
 
 var fetchTracks = exports.fetchTracks = function fetchTracks(query_string, token) {
-  console.log(token);
+  // console.log(token);
   return $.ajax({
     method: 'GET',
     url: 'https://api.spotify.com/v1/search?q=track:' + query_string + '&type=track&limit=5',

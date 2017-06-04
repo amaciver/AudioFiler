@@ -47,9 +47,7 @@ class Search extends React.Component {
     switch (method) {
       case 'type':
         this.setState({value: newValue}, () => {
-          // console.log(this.props.token.token);
           let token = this.props.token.token;
-          console.log(token);
           this.props.fetchTracks(newValue, token).then( () => {
             this.setState({
               suggestions: this.props.tracks
