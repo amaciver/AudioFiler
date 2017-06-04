@@ -8,9 +8,9 @@ const About = () => {
         with all sorts of data on the song, ranging from spectral analysis
         to bpm to intensity. Our backend then runs that vector through 20
         separately trained Random Forest models, and each one votes on which genre it thinks
-        that your song is. Once that's finished, the top results are returned to
+        that your song is. Once that’s finished, the top results are returned to
         you, sorted by which genres received the most votes.</h2>
-    );
-};
+  )
+}
 
 export default About;
