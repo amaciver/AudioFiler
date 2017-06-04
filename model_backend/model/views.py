@@ -70,3 +70,7 @@ def show(request, preview_url):
         confidence = sorted_guesses[i][1] / 20
         top_guesses.append([genre, confidence])
     return JsonResponse({"classification": top_guesses})
+
+def token(request):
+    token = 'BQCPTiyehGnTnKX-i-guyDoczzd-NH3Ela2PZ43S3dX2iOnwGlyyrIqs8jIUcR_vWdH3RV0MAQkbY73IkzOk1g'
+    return JsonResponse({'token': token})
