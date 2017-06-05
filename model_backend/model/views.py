@@ -3,6 +3,7 @@ import requests
 import pdb
 from collections import Counter
 import numpy as np
+import sqlite3
 
 from helpers import util
 
@@ -70,3 +71,10 @@ def show(request, preview_url):
         confidence = sorted_guesses[i][1] / 20
         top_guesses.append([genre, confidence])
     return JsonResponse({"classification": top_guesses})
+
+def token(request):
+    conn = sqlite3.connect('db.sqlite3')
+    c = conn.cursor()
+    token = c.execute("SELECT token FROM tokens LIMIT 1").fetchone()[0]
+    # print(token)
+    return JsonResponse({'token': token})

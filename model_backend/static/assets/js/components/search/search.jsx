@@ -37,6 +37,7 @@ class Search extends React.Component {
   }
 
   componentWillMount() {
+    this.props.fetchToken().then( () => console.log(this.props.token))
   }
 
   componentWillReceiveProps(nextProps) {
@@ -112,6 +113,7 @@ class Search extends React.Component {
 
     return(
       <div className='search-wrapper'>
+        <div>Hello</div>
         <div className='search-title'>Search</div>
 
         <form className='search-form' onSubmit={this.handleSubmit}>

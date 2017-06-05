@@ -30,10 +30,10 @@ export const clearTrack = track => ({
 
 
 
-export const fetchTracks = (query_string) => dispatch => {
+export const fetchTracks = (query_string, token) => dispatch => {
   // dispatch(startLoadingTracks());
   return (
-    APIUtil.fetchTracks(query_string)
+    APIUtil.fetchTracks(query_string, token)
     .then(tracks => dispatch(receiveTracks(tracks)))
   );
 }

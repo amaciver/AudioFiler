@@ -37,6 +37,7 @@ class Search extends React.Component {
   }
 
   componentWillMount() {
+    this.props.fetchToken()
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,7 +47,8 @@ class Search extends React.Component {
     switch (method) {
       case 'type':
         this.setState({value: newValue}, () => {
-          this.props.fetchTracks(newValue).then( () => {
+          let token = this.props.token.token;
+          this.props.fetchTracks(newValue, token).then( () => {
             this.setState({
               suggestions: this.props.tracks
             })
@@ -112,6 +114,7 @@ class Search extends React.Component {
 
     return(
       <div className='search-wrapper'>
+        <div>Hello</div>
         <div className='search-title'>Search</div>
 
         <form className='search-form' onSubmit={this.handleSubmit}>

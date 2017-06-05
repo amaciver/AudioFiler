@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Search from './search';
 import { fetchTracks, receiveTrack } from '../../actions/tracks_actions';
 import { fetchResults, clearResults } from '../../actions/results_actions';
+import { fetchToken } from '../../actions/token_actions';
 
 const mapStateToProps = (state) => {
   let tracks = [];
@@ -19,12 +20,14 @@ const mapStateToProps = (state) => {
   }
   // console.log(tracks);
   return ({
-    tracks: tracks
+    tracks: tracks,
+    token: state.token
   });
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchTracks: (query_string) => dispatch(fetchTracks(query_string)),
+  fetchToken: () => dispatch(fetchToken()),
+  fetchTracks: (query_string, token) => dispatch(fetchTracks(query_string, token)),
   fetchResults: (url_string) => dispatch(fetchResults(url_string)),
   receiveTrack: (track) => dispatch(receiveTrack(track)),
   clearResults: (results) => dispatch(clearResults(results))
