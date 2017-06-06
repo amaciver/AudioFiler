@@ -93,3 +93,12 @@
   cursor: pointer;
   opacity: 1;
 }
+
+.ReactModal__Content {
+  width: 50vw;
+  line-height: normal;
+}
+
+.hidden {
+  display: none;
+}
