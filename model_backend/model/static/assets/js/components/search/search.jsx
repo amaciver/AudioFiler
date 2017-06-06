@@ -1,6 +1,8 @@
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import { hashHistory } from 'react-router';
+import Howler from '../main_page/player';
+
 
 // TODO: implement isMobile on suggestions list kaimellea/isMobile
 
@@ -27,7 +29,10 @@ class Search extends React.Component {
       value: '',
       suggestions: [],
       url: '',
-      track: null
+      track: null,
+      found: true,
+      searching: false
+
     };
     this.onChange = this.onChange.bind(this);
     this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this);
@@ -66,8 +71,14 @@ class Search extends React.Component {
     // console.log(this.state.url);
     this.props.receiveTrack(this.state.track);
     this.props.clearResults({});
+    this.setState({searching: true});
     // console.log(this.props.tracks);
-    this.props.fetchResults(this.state.url);
+    if (this.state.url) {
+
+      this.props.fetchResults(this.state.url);
+    } else {
+      this.setState({found: false});
+    }
   }
 
   onSuggestionsFetchRequested({ value }) {
@@ -84,7 +95,8 @@ class Search extends React.Component {
   }
 
   onSuggestionSelected(e, { suggestion, method }) {
-    // console.log(suggestion);
+    // console.log(suggestion.url);
+
     this.setState({url: suggestion.url, track: suggestion})
   }
 
@@ -112,10 +124,20 @@ class Search extends React.Component {
       </div>
     );
 
+    let errorClass = 'hidden'
+    if (this.state.found === false) {
+      errorClass = ''
+    }
+
+    let howler = null
+    if (this.state.url && this.state.searching) {
+      howler = <Howler url={this.state.url} />
+    }
     return(
       <div className='search-wrapper'>
-        <div>Hello</div>
+
         <div className='search-title'>Search</div>
+        <div className={errorClass}>URL not found</div>
 
         <form className='search-form' onSubmit={this.handleSubmit}>
           <div className='search-oval'>
@@ -142,6 +164,7 @@ class Search extends React.Component {
             </button>
           </div>
         </form>
+        {howler}
       </div>
     );
   }

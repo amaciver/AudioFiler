@@ -6,6 +6,7 @@ import Animation from '../animation/animation';
 import ResultsContainer from '../results/results_container';
 import About from '../about/about';
 import Modal from 'react-modal';
+// import Howler from './player';
 
 const aboutStyles = {
   content : {
@@ -56,6 +57,7 @@ class MainPage extends React.Component {
           <div className='ux-content'>
             <div className='col-1-3 left-pane'>
               <SearchContainer />
+
             </div>
             <div className='col-1-3 middle-pane'>
               <Animation loading={this.props.loading}/>
