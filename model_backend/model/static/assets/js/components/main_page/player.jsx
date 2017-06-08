@@ -27,14 +27,6 @@ class Howler extends React.Component {
     }
     return (
       <div>
-        {icon}
-        <ReactHowler
-          src={'https://s3-us-west-1.amazonaws.com/listentothis-pro/tracks/mp3_files/000/000/004/original/Jeopardy+Theme.mp3'}
-          playing={true}
-          preload={true}
-          mute={this.state.mute}
-          volume={1.0}
-          />
       </div>
     )
   }
@@ -42,3 +34,12 @@ class Howler extends React.Component {
 }
 
 export default Howler;
+
+// {icon}
+// <ReactHowler
+//   src={'https://s3-us-west-1.amazonaws.com/listentothis-pro/tracks/mp3_files/000/000/004/original/Jeopardy+Theme.mp3'}
+//   playing={true}
+//   preload={true}
+//   mute={this.state.mute}
+//   volume={1.0}
+//   />
